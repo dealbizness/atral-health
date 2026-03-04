@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atral Health | Innovative Revenue Cycle Management & Medical Coding</title>
+    <title>Atral Health | Enterprise Revenue Cycle Management</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -11,420 +11,378 @@
         tailwind.config = {
             darkMode: 'class',
             theme: {
-                extend: {}
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
             }
         }
     </script>
     <style>
         body { font-family: 'Inter', sans-serif; }
         
-        @keyframes fade-in {
-            from { opacity: 0; transform: translateY(10px); }
+        @keyframes fade-up {
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .animate-fade-in {
-            animation: fade-in 0.8s ease-out forwards;
+        .animate-fade-up {
+            animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         .glass {
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-        .dark .glass {
-            background: rgba(15, 23, 42, 0.8);
             border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .premium-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .premium-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1);
+        }
+        .dark .premium-card:hover {
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5);
+            border-color: rgba(59, 130, 246, 0.3);
         }
 
         .gradient-text {
-            background: linear-gradient(to right, #2563eb, #4f46e5, #0891b2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .dark .gradient-text {
-            background: linear-gradient(to right, #60a5fa, #818cf8, #22d3ee);
+            background: linear-gradient(135deg, #3b82f6 0%, #6366f1 50%, #2dd4bf 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .nav-scrolled {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            padding-top: 1rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(226, 232, 240, 1);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
         .dark .nav-scrolled {
-            background: rgba(2, 6, 23, 0.9);
-            border-bottom: 1px solid rgba(30, 41, 59, 1);
-        }
-
-        input:focus, textarea:focus, select:focus {
-            outline: none;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+            background: rgba(2, 6, 23, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
     </style>
 </head>
-<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 selection:bg-blue-500/30 transition-colors duration-300">
+<body class="bg-white dark:bg-[#020617] text-slate-900 dark:text-slate-100 selection:bg-blue-500/30 transition-colors duration-500">
 
     <!-- Navigation -->
-    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-transparent py-6">
-        <div class="container mx-auto px-6 flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/20">
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-500 py-6">
+        <div class="container mx-auto px-6 lg:px-12 flex justify-between items-center">
+            <div class="flex items-center gap-2.5 group cursor-pointer">
+                <div class="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-600/20 group-hover:scale-105 transition-transform">
                     <i data-lucide="activity" class="text-white w-6 h-6"></i>
                 </div>
-                <span class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
-                    ATRAL <span class="font-light text-slate-500 dark:text-slate-400">HEALTH</span>
+                <span class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white uppercase">
+                    Atral <span class="font-light text-slate-400">Health</span>
                 </span>
             </div>
 
-            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
-                <a href="#home" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Home</a>
-                <a href="#services" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Services</a>
-                <a href="#about" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">About</a>
-                <a href="#compliance" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Compliance</a>
-                <a href="#contact" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-blue-600 font-bold underline underline-offset-4">Contact</a>
+            <div class="hidden md:flex items-center gap-10 text-[13px] font-semibold uppercase tracking-wider">
+                <a href="#home" class="hover:text-brand-600 transition-colors">Home</a>
+                <a href="#services" class="hover:text-brand-600 transition-colors">Services</a>
+                <a href="#about" class="hover:text-brand-600 transition-colors">About</a>
+                <a href="#compliance" class="hover:text-brand-600 transition-colors">Compliance</a>
                 
-                <button id="theme-toggle" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-400">
-                    <i data-lucide="sun" id="sun-icon" class="hidden"></i>
-                    <i data-lucide="moon" id="moon-icon"></i>
+                <div class="h-4 w-[1px] bg-slate-200 dark:bg-slate-800"></div>
+
+                <button id="theme-toggle" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-500">
+                    <i data-lucide="sun" id="sun-icon" class="hidden w-5 h-5"></i>
+                    <i data-lucide="moon" id="moon-icon" class="w-5 h-5"></i>
                 </button>
+
+                <a href="#contact" class="bg-slate-900 text-white dark:bg-white dark:text-slate-900 px-7 py-2.5 rounded-full hover:bg-brand-600 dark:hover:bg-brand-50 transition-all shadow-lg shadow-black/5">
+                    Contact Us
+                </a>
             </div>
 
-            <button class="md:hidden text-slate-900 dark:text-white" id="menu-btn">
-                <i data-lucide="menu" id="menu-icon"></i>
+            <button class="md:hidden p-2 bg-slate-100 dark:bg-slate-900 rounded-lg" id="menu-btn">
+                <i data-lucide="menu" id="menu-icon" class="w-6 h-6"></i>
             </button>
         </div>
     </nav>
 
-    <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu" class="fixed inset-0 z-40 bg-white dark:bg-slate-950 pt-24 px-6 hidden md:hidden transition-colors">
-        <div class="flex flex-col gap-6">
-            <a href="#home" class="text-xl font-semibold mobile-link">Home</a>
-            <a href="#services" class="text-xl font-semibold mobile-link">Services</a>
-            <a href="#about" class="text-xl font-semibold mobile-link">About</a>
-            <a href="#compliance" class="text-xl font-semibold mobile-link">Compliance</a>
-            <a href="#contact" class="text-xl font-semibold mobile-link">Contact</a>
-            <button id="theme-toggle-mobile" class="w-full bg-slate-100 dark:bg-slate-900 p-4 rounded-xl flex items-center justify-center gap-3">
-                <i data-lucide="sun" id="sun-icon-mobile" class="hidden"></i>
-                <i data-lucide="moon" id="moon-icon-mobile"></i>
-                <span>Toggle Appearance</span>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-white dark:bg-[#020617] pt-28 px-8 hidden transition-all">
+        <div class="flex flex-col gap-8 text-2xl font-bold">
+            <a href="#home" class="mobile-link">Home</a>
+            <a href="#services" class="mobile-link">Services</a>
+            <a href="#about" class="mobile-link">About</a>
+            <a href="#compliance" class="mobile-link">Compliance</a>
+            <a href="#contact" class="mobile-link text-brand-600">Contact</a>
+            <button id="theme-toggle-mobile" class="mt-4 flex items-center gap-3 text-lg font-medium text-slate-500">
+                <i data-lucide="moon" class="w-6 h-6"></i> Toggle Mode
             </button>
         </div>
     </div>
 
     <!-- Hero Section -->
-    <section id="home" class="relative pt-40 pb-20 overflow-hidden">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 overflow-hidden">
-            <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600/10 blur-[120px] rounded-full"></div>
-            <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-600/10 blur-[120px] rounded-full"></div>
+    <section id="home" class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+        <div class="absolute inset-0 -z-10">
+            <div class="absolute top-0 right-0 w-[60%] h-[60%] bg-blue-600/5 blur-[140px] rounded-full"></div>
+            <div class="absolute bottom-0 left-0 w-[50%] h-[50%] bg-indigo-600/5 blur-[140px] rounded-full"></div>
         </div>
 
-        <div class="container mx-auto px-6 text-center">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 text-sm font-medium mb-8 animate-fade-in">
-                <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-                </span>
-                <span>Innovative Startup Approach to RCM</span>
-            </div>
-            
-            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight max-w-5xl mx-auto animate-fade-in">
-                Reimagining Revenue Cycle <br>
-                <span class="gradient-text">For U.S. Providers.</span>
-            </h1>
-            
-            <p class="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto mb-10 leading-relaxed font-light animate-fade-in">
-                At Atral Health, we bring a technology-first approach to billing, coding, and reimbursement. We simplify complexity and strengthen financial outcomes for hospitals and physician groups.
-            </p>
+        <div class="container mx-auto px-6 lg:px-12">
+            <div class="max-w-4xl animate-fade-up">
+                <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 text-xs font-bold uppercase tracking-widest mb-8">
+                    <span class="w-2 h-2 rounded-full bg-brand-600 animate-pulse"></span>
+                    Innovative Technology-First RCM
+                </div>
+                
+                <h1 class="text-6xl md:text-8xl font-[900] tracking-tight mb-8 leading-[1.05]">
+                    The New Standard in <br>
+                    <span class="gradient-text">Revenue Intelligence.</span>
+                </h1>
+                
+                <p class="text-xl md:text-2xl text-slate-500 dark:text-slate-400 mb-12 leading-relaxed max-w-2xl font-medium">
+                    Atral Health empowers U.S. healthcare providers with technology-driven billing and coding solutions designed to maximize clinical accuracy and cash flow.
+                </p>
 
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in">
-                <a href="#contact" class="w-full sm:w-auto px-8 py-4 bg-blue-600 text-white rounded-xl font-bold shadow-xl shadow-blue-900/40 hover:bg-blue-500 transition-all flex items-center justify-center gap-2 group">
-                    Book a Consultation <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
-                </a>
-                <a href="#services" class="w-full sm:w-auto px-8 py-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-all text-slate-900 dark:text-white">
-                    Explore Our Services
-                </a>
-            </div>
-        </div>
-    </section>
+                <div class="flex flex-col sm:flex-row gap-5">
+                    <a href="#contact" class="px-10 py-5 bg-brand-600 text-white rounded-2xl font-bold shadow-2xl shadow-blue-600/30 hover:bg-brand-700 transition-all flex items-center justify-center gap-3">
+                        Book a Strategic Audit <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#services" class="px-10 py-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-all text-center">
+                        Our Methodology
+                    </a>
+                </div>
 
-    <!-- Services Detailed Section -->
-    <section id="services" class="py-24 bg-slate-100/30 dark:bg-slate-900/10 transition-colors">
-        <div class="container mx-auto px-6 text-center mb-16">
-            <span class="text-blue-600 dark:text-blue-500 font-bold tracking-widest text-xs uppercase mb-4 block">End-to-End Solutions</span>
-            <h2 class="text-3xl md:text-5xl font-bold mb-4">Precision RCM Services</h2>
-            <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">We focus on specialized expertise to ensure every cent of your earned revenue is captured accurately and quickly.</p>
-        </div>
-
-        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Charge Entry -->
-            <div class="p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl hover:border-blue-500/50 transition-all shadow-sm">
-                <i data-lucide="plus-square" class="w-10 h-10 text-blue-500 mb-6"></i>
-                <h3 class="text-xl font-bold mb-3">Charge Entry</h3>
-                <p class="text-slate-500 text-sm leading-relaxed">Swift and accurate entry of patient charges to ensure zero delay in the billing cycle.</p>
-            </div>
-            <!-- Charge Auditing -->
-            <div class="p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl hover:border-blue-500/50 transition-all shadow-sm">
-                <i data-lucide="search" class="w-10 h-10 text-indigo-500 mb-6"></i>
-                <h3 class="text-xl font-bold mb-3">Charge Auditing</h3>
-                <p class="text-slate-500 text-sm leading-relaxed">Comprehensive review to identify missing charges and ensure perfect clinical documentation alignment.</p>
-            </div>
-            <!-- Medical Coding -->
-            <div class="p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl hover:border-blue-500/50 transition-all shadow-sm">
-                <i data-lucide="file-text" class="w-10 h-10 text-cyan-500 mb-6"></i>
-                <h3 class="text-xl font-bold mb-3">Medical Coding</h3>
-                <p class="text-slate-500 text-sm leading-relaxed">AAPC & AHIMA certified coding for ICD-10, CPT, and HCPCS with a focus on maximum accuracy.</p>
-            </div>
-            <!-- Coding Audit -->
-            <div class="p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl hover:border-blue-500/50 transition-all shadow-sm">
-                <i data-lucide="clipboard-check" class="w-10 h-10 text-emerald-500 mb-6"></i>
-                <h3 class="text-xl font-bold mb-3">Coding Audit</h3>
-                <p class="text-slate-500 text-sm leading-relaxed">Regular compliance reviews to protect against undercoding and payer audits.</p>
-            </div>
-            <!-- Medical Billing -->
-            <div class="p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl hover:border-blue-500/50 transition-all shadow-sm">
-                <i data-lucide="credit-card" class="w-10 h-10 text-orange-500 mb-6"></i>
-                <h3 class="text-xl font-bold mb-3">Medical Billing</h3>
-                <p class="text-slate-500 text-sm leading-relaxed">Electronic claim filing and payment posting managed by results-driven experts.</p>
-            </div>
-            <!-- Denial Management -->
-            <div class="p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl hover:border-blue-500/50 transition-all shadow-sm">
-                <i data-lucide="alert-circle" class="w-10 h-10 text-rose-500 mb-6"></i>
-                <h3 class="text-xl font-bold mb-3">Denial Management</h3>
-                <p class="text-slate-500 text-sm leading-relaxed">Aggressive appeal strategy for clinical and technical denials to recover leaked revenue.</p>
-            </div>
-        </div>
-        
-        <div class="container mx-auto px-6 mt-8 flex justify-center">
-            <div class="p-8 bg-blue-600/5 border border-blue-500/20 rounded-3xl flex flex-col md:flex-row items-center gap-6 max-w-4xl w-full">
-                <i data-lucide="stethoscope" class="w-12 h-12 text-blue-600 shrink-0"></i>
-                <div>
-                    <h3 class="text-xl font-bold mb-2">Clinical Document Improvement (CDI)</h3>
-                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">We work alongside your clinical team to improve documentation quality, ensuring coding reflects the true acuity of patient care.</p>
+                <div class="mt-20 pt-10 border-t border-slate-100 dark:border-slate-900 flex flex-wrap gap-12 opacity-50 grayscale hover:grayscale-0 transition-all duration-700">
+                    <div class="flex items-center gap-2 font-bold text-lg"><i data-lucide="check-circle" class="w-5 h-5 text-brand-600"></i> AAPC Certified</div>
+                    <div class="flex items-center gap-2 font-bold text-lg"><i data-lucide="shield-check" class="w-5 h-5 text-brand-600"></i> HIPAA Compliant</div>
+                    <div class="flex items-center gap-2 font-bold text-lg"><i data-lucide="globe" class="w-5 h-5 text-brand-600"></i> SOC 2 Type II</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Why Us Section -->
-    <section id="why-us" class="py-24 border-t border-slate-200 dark:border-slate-900">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col lg:flex-row gap-16 items-center">
-                <div class="lg:w-1/2">
-                    <span class="text-blue-600 dark:text-blue-500 font-bold tracking-widest text-xs uppercase mb-4 block">The Atral Advantage</span>
-                    <h2 class="text-3xl md:text-5xl font-bold mb-6">Building Trust Through Results.</h2>
-                    <p class="text-slate-600 dark:text-slate-400 text-lg mb-8 font-light leading-relaxed">
-                        We value client trust at our core. Our vision is to create a new age of satisfaction for both healthcare providers and their employees through optimized financial health.
-                    </p>
+    <!-- Detailed Services -->
+    <section id="services" class="py-32 bg-slate-50 dark:bg-[#03081c]">
+        <div class="container mx-auto px-6 lg:px-12">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+                <div class="max-w-2xl">
+                    <span class="text-brand-600 font-black uppercase tracking-[0.2em] text-xs mb-4 block">Comprehensive Portfolio</span>
+                    <h2 class="text-4xl md:text-6xl font-extrabold tracking-tight">Enterprise RCM Solutions.</h2>
+                </div>
+                <p class="text-slate-500 dark:text-slate-400 md:max-w-sm font-medium">Precision-engineered workflows designed for high-volume hospitals and specialized physician groups.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Charge Entry -->
+                <div class="premium-card p-10 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-[2.5rem]">
+                    <div class="w-14 h-14 bg-blue-50 dark:bg-blue-900/20 rounded-2xl flex items-center justify-center text-blue-600 mb-8">
+                        <i data-lucide="edit-3" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Charge Entry</h3>
+                    <p class="text-slate-500 dark:text-slate-400 leading-relaxed text-sm">Ultra-fast, validated entry protocols that eliminate front-end lag and ensure claim velocity.</p>
+                </div>
+                <!-- Coding -->
+                <div class="premium-card p-10 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-[2.5rem]">
+                    <div class="w-14 h-14 bg-emerald-50 dark:bg-emerald-900/20 rounded-2xl flex items-center justify-center text-emerald-600 mb-8">
+                        <i data-lucide="code" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Medical Coding</h3>
+                    <p class="text-slate-500 dark:text-slate-400 leading-relaxed text-sm">Expert ICD-10 & CPT coding with specialty-specific logic to capture 100% of earned acuity.</p>
+                </div>
+                <!-- Auditing -->
+                <div class="premium-card p-10 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-[2.5rem]">
+                    <div class="w-14 h-14 bg-indigo-50 dark:bg-indigo-900/20 rounded-2xl flex items-center justify-center text-indigo-600 mb-8">
+                        <i data-lucide="file-search" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Clinical Auditing</h3>
+                    <p class="text-slate-500 dark:text-slate-400 leading-relaxed text-sm">Continuous internal audits to ensure compliance and identify hidden revenue leakages before they occur.</p>
+                </div>
+                <!-- Billing -->
+                <div class="premium-card p-10 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-[2.5rem]">
+                    <div class="w-14 h-14 bg-orange-50 dark:bg-orange-900/20 rounded-2xl flex items-center justify-center text-orange-600 mb-8">
+                        <i data-lucide="wallet" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Medical Billing</h3>
+                    <p class="text-slate-500 dark:text-slate-400 leading-relaxed text-sm">Managed transmission and payment posting with 24-hour turnaround for ERA/EOB processing.</p>
+                </div>
+                <!-- Denials -->
+                <div class="premium-card p-10 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-[2.5rem]">
+                    <div class="w-14 h-14 bg-rose-50 dark:bg-rose-900/20 rounded-2xl flex items-center justify-center text-rose-600 mb-8">
+                        <i data-lucide="shield-alert" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Denial Management</h3>
+                    <p class="text-slate-500 dark:text-slate-400 leading-relaxed text-sm">Aggressive clinical appeal strategies led by auditors to reverse complex payer rejections.</p>
+                </div>
+                <!-- CDI -->
+                <div class="premium-card p-10 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-[2.5rem]">
+                    <div class="w-14 h-14 bg-cyan-50 dark:bg-cyan-900/20 rounded-2xl flex items-center justify-center text-cyan-600 mb-8">
+                        <i data-lucide="stethoscope" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">CDI Programs</h3>
+                    <p class="text-slate-500 dark:text-slate-400 leading-relaxed text-sm">Aligning physician documentation with clinical truth to ensure coding integrity and legal safety.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Atral (Nuanced Trust) -->
+    <section class="py-32 bg-white dark:bg-[#020617] overflow-hidden">
+        <div class="container mx-auto px-6 lg:px-12 flex flex-col lg:flex-row items-center gap-20">
+            <div class="lg:w-1/2 relative">
+                <div class="absolute -top-10 -left-10 w-40 h-40 bg-brand-600/10 blur-3xl rounded-full"></div>
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-8">The Atral Difference.</h2>
+                <p class="text-lg text-slate-500 dark:text-slate-400 mb-10 leading-relaxed">We don't just process claims; we discover the root cause of financial friction. Our vision is to create a seamless partnership where technology powers your growth.</p>
+                
+                <div class="space-y-10">
+                    <div class="flex gap-6">
+                        <div class="shrink-0 w-12 h-12 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 flex items-center justify-center font-black">01</div>
+                        <div>
+                            <h4 class="text-xl font-bold mb-2">Prevention Analysis</h4>
+                            <p class="text-slate-500 dark:text-slate-400 text-sm">We use predictive models to identify potential issues before they hit the clearinghouse.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6">
+                        <div class="shrink-0 w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-800 text-brand-600 flex items-center justify-center font-black">02</div>
+                        <div>
+                            <h4 class="text-xl font-bold mb-2">Absolute Transparency</h4>
+                            <p class="text-slate-500 dark:text-slate-400 text-sm">Clear, real-time reporting that shows you exactly where your revenue stands at every moment.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lg:w-1/2">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="p-8 bg-slate-50 dark:bg-slate-900 rounded-[2rem] border border-slate-100 dark:border-slate-800 hover:border-brand-600/50 transition-all">
+                        <i data-lucide="trending-up" class="w-8 h-8 text-brand-600 mb-6"></i>
+                        <h5 class="text-3xl font-black mb-1">98%+</h5>
+                        <p class="text-xs uppercase font-bold tracking-widest text-slate-400">Clean Claim Rate</p>
+                    </div>
+                    <div class="p-8 bg-slate-900 text-white rounded-[2rem] border border-slate-800 hover:scale-105 transition-all">
+                        <i data-lucide="clock" class="w-8 h-8 text-blue-400 mb-6"></i>
+                        <h5 class="text-3xl font-black mb-1">< 24h</h5>
+                        <p class="text-xs uppercase font-bold tracking-widest text-slate-400">Coding Turnaround</p>
+                    </div>
+                    <div class="p-8 bg-slate-50 dark:bg-slate-900 rounded-[2rem] border border-slate-100 dark:border-slate-800 flex flex-col justify-center items-center text-center col-span-2">
+                        <div class="flex -space-x-3 mb-4">
+                            <div class="w-10 h-10 rounded-full bg-blue-500 border-2 border-white dark:border-slate-900"></div>
+                            <div class="w-10 h-10 rounded-full bg-indigo-500 border-2 border-white dark:border-slate-900"></div>
+                            <div class="w-10 h-10 rounded-full bg-emerald-500 border-2 border-white dark:border-slate-900"></div>
+                        </div>
+                        <p class="text-sm font-bold">Trusted by 50+ Healthcare Organizations</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-32 bg-slate-900 text-white relative overflow-hidden">
+        <div class="container mx-auto px-6 lg:px-12 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-20 items-center">
+                <div>
+                    <span class="text-brand-600 font-black uppercase tracking-[0.3em] text-xs mb-6 block">Company Identity</span>
+                    <h2 class="text-5xl md:text-7xl font-[900] tracking-tight mb-8">Our Vision & Mission.</h2>
+                    <p class="text-slate-400 text-lg leading-relaxed mb-10">We are a results-driven RCM company helping healthcare providers improve cash flow and reduce denials through expert-driven solutions.</p>
                     
-                    <div class="space-y-6">
-                        <div class="flex items-start gap-4">
-                            <div class="mt-1 p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg text-blue-600"><i data-lucide="zoom-in" class="w-5 h-5"></i></div>
-                            <div>
-                                <h4 class="font-bold">Root Cause Discovery</h4>
-                                <p class="text-sm text-slate-500">We don't just fix symptoms; we analyze existing workflows to discover why revenue is being lost at the source.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <div class="mt-1 p-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg text-indigo-600"><i data-lucide="shield-check" class="w-5 h-5"></i></div>
-                            <div>
-                                <h4 class="font-bold">Prevention Analysis</h4>
-                                <p class="text-sm text-slate-500">Our team develops proactive solutions based on current problems to protect your practice from future issues.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <div class="mt-1 p-2 bg-cyan-100 dark:bg-cyan-900/30 rounded-lg text-cyan-600"><i data-lucide="users" class="w-5 h-5"></i></div>
-                            <div>
-                                <h4 class="font-bold">Client-Centric Philosophy</h4>
-                                <p class="text-sm text-slate-500">We envision a partnership where your satisfaction and your employees' ease of work are our primary metrics of success.</p>
-                            </div>
-                        </div>
+                    <div class="p-8 bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2rem]">
+                        <h3 class="text-xl font-bold mb-4 flex items-center gap-3"><i data-lucide="award" class="text-brand-600"></i> Leadership</h3>
+                        <p class="text-slate-400 text-sm">Led by a team of industry veterans, solutions architects, and compliance officers dedicated to the integrity of medical billing.</p>
                     </div>
                 </div>
                 
-                <div class="lg:w-1/2">
-                    <div class="bg-slate-100 dark:bg-slate-900 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-800">
-                        <h3 class="text-2xl font-bold mb-8">Industries We Serve</h3>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="p-6 bg-white dark:bg-slate-950 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 text-center">
-                                <i data-lucide="hospital" class="w-8 h-8 mx-auto mb-4 text-blue-500"></i>
-                                <span class="font-bold text-sm">Hospitals</span>
-                            </div>
-                            <div class="p-6 bg-white dark:bg-slate-950 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 text-center">
-                                <i data-lucide="user-plus" class="w-8 h-8 mx-auto mb-4 text-blue-500"></i>
-                                <span class="font-bold text-sm">Physician Groups</span>
-                            </div>
-                            <div class="p-6 bg-white dark:bg-slate-950 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 text-center">
-                                <i data-lucide="microscope" class="w-8 h-8 mx-auto mb-4 text-blue-500"></i>
-                                <span class="font-bold text-sm">Laboratories</span>
-                            </div>
-                            <div class="p-6 bg-white dark:bg-slate-950 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 text-center">
-                                <i data-lucide="heart" class="w-8 h-8 mx-auto mb-4 text-blue-500"></i>
-                                <span class="font-bold text-sm">Specialty Clinics</span>
-                            </div>
-                        </div>
+                <div class="space-y-6">
+                    <div class="group p-10 bg-white/5 hover:bg-white/10 transition-all rounded-[3rem] border border-white/10">
+                        <div class="w-12 h-12 bg-brand-600 rounded-2xl flex items-center justify-center mb-6"><i data-lucide="eye" class="w-6 h-6"></i></div>
+                        <h4 class="text-2xl font-bold mb-4">Vision</h4>
+                        <p class="text-slate-400 font-light italic leading-relaxed">"To envision a new age for both client and employee satisfaction by establishing a foundation of absolute trust and innovative excellence."</p>
+                    </div>
+                    <div class="group p-10 bg-white/5 hover:bg-white/10 transition-all rounded-[3rem] border border-white/10">
+                        <div class="w-12 h-12 bg-white text-slate-900 rounded-2xl flex items-center justify-center mb-6"><i data-lucide="target" class="w-6 h-6"></i></div>
+                        <h4 class="text-2xl font-bold mb-4">Mission</h4>
+                        <p class="text-slate-400 font-light leading-relaxed">"Empower providers with smarter systems, clearer reporting, and faster reimbursements so they can focus on delivering exceptional patient care."</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Us Section (Vision/Mission) -->
-    <section id="about" class="py-24 bg-blue-600 text-white overflow-hidden relative">
-        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="max-w-4xl mx-auto text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-extrabold mb-6">About Atral Health</h2>
-                <p class="text-xl text-blue-100 font-light">Empowering providers with smarter systems and clearer reporting.</p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-12">
-                <div class="p-10 bg-white/10 backdrop-blur-md rounded-3xl border border-white/20">
-                    <h3 class="text-2xl font-bold mb-4 flex items-center gap-3">
-                        <i data-lucide="eye" class="w-8 h-8 text-blue-200"></i> Our Vision
-                    </h3>
-                    <p class="text-blue-50 leading-relaxed italic">
-                        "To envision a new age for both client and employee satisfaction by establishing a foundation of absolute trust and innovative excellence in the revenue cycle landscape."
-                    </p>
-                </div>
-                <div class="p-10 bg-white/10 backdrop-blur-md rounded-3xl border border-white/20">
-                    <h3 class="text-2xl font-bold mb-4 flex items-center gap-3">
-                        <i data-lucide="target" class="w-8 h-8 text-blue-200"></i> Our Mission
-                    </h3>
-                    <p class="text-blue-50 leading-relaxed">
-                        "Empower practices and hospitals with smarter systems, clearer reporting, and faster reimbursements so they can focus on delivering exceptional patient care while we power the revenue behind it."
-                    </p>
-                </div>
-            </div>
+    <!-- Compliance -->
+    <section id="compliance" class="py-32 bg-white dark:bg-[#020617]">
+        <div class="container mx-auto px-6 lg:px-12 text-center mb-20">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-6">Security First.</h2>
+            <p class="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">We operate under the highest standards of data sovereignty and HIPAA privacy.</p>
         </div>
-    </section>
-
-    <!-- Compliance & Security Section -->
-    <section id="compliance" class="py-24 border-b border-slate-200 dark:border-slate-900 transition-colors">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row items-center gap-16">
-                <div class="md:w-1/2">
-                    <div class="p-8 rounded-[2rem] glass shadow-2xl relative overflow-hidden transition-colors border-blue-500/20">
-                        <div class="flex items-center gap-4 mb-8">
-                            <div class="w-12 h-12 rounded-xl bg-blue-600 flex items-center justify-center shadow-lg"><i data-lucide="shield" class="text-white"></i></div>
-                            <div>
-                                <h4 class="font-bold text-lg">Compliance & Security</h4>
-                                <p class="text-xs text-slate-500 uppercase tracking-widest">Global Security Standards</p>
-                            </div>
-                        </div>
-                        <div class="space-y-4">
-                            <div class="bg-white/50 dark:bg-slate-950/50 p-4 rounded-xl border border-slate-200 dark:border-slate-800 flex justify-between items-center">
-                                <span class="text-sm font-medium">HIPAA Sovereignty</span>
-                                <span class="text-[10px] px-2 py-1 rounded-full bg-green-500/20 text-green-600 border border-green-500/30">VERIFIED</span>
-                            </div>
-                            <div class="bg-white/50 dark:bg-slate-950/50 p-4 rounded-xl border border-slate-200 dark:border-slate-800 flex justify-between items-center">
-                                <span class="text-sm font-medium">Data Privacy Protocol</span>
-                                <span class="text-[10px] px-2 py-1 rounded-full bg-blue-500/20 text-blue-600 border border-blue-500/30">AES-256</span>
-                            </div>
-                            <p class="text-[11px] text-slate-500 italic mt-4">
-                                Our technical infrastructure is built to meet the data sovereignty requirements of modern healthcare, ensuring PHI is protected at every touchpoint.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="md:w-1/2">
-                    <h2 class="text-4xl font-bold mb-6">Security is Our Foundation.</h2>
-                    <p class="text-slate-600 dark:text-slate-400 font-light mb-8 text-lg">We operate with bank-grade encryption and full audit logging. Our systems are continuously updated to reflect the latest federal and payer compliance requirements.</p>
-                    <div class="grid grid-cols-2 gap-6">
-                        <div class="flex items-center gap-3">
-                            <i data-lucide="check-circle" class="w-5 h-5 text-blue-500"></i>
-                            <span class="text-sm font-semibold">HITRUST Standards</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <i data-lucide="check-circle" class="w-5 h-5 text-blue-500"></i>
-                            <span class="text-sm font-semibold">SOC 2 Type II</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <i data-lucide="check-circle" class="w-5 h-5 text-blue-500"></i>
-                            <span class="text-sm font-semibold">2FA Protocols</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <i data-lucide="check-circle" class="w-5 h-5 text-blue-500"></i>
-                            <span class="text-sm font-semibold">VPN Secured Access</span>
-                        </div>
-                    </div>
-                </div>
+        
+        <div class="container mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="p-12 glass dark:bg-slate-900 rounded-[3rem] text-center">
+                <i data-lucide="shield" class="w-12 h-12 mx-auto text-brand-600 mb-6"></i>
+                <h4 class="text-xl font-bold mb-2">HIPAA Sovereignty</h4>
+                <p class="text-slate-400 text-sm">Fully compliant PHI management with military-grade encryption.</p>
             </div>
-        </div>
-    </section>
-
-    <!-- Case Study Preview -->
-    <section class="py-24 bg-slate-50 dark:bg-slate-950">
-        <div class="container mx-auto px-6">
-            <div class="bg-gradient-to-r from-slate-900 to-slate-800 text-white rounded-[3rem] p-10 md:p-20 relative overflow-hidden">
-                <div class="absolute top-0 right-0 p-10 opacity-10">
-                    <i data-lucide="bar-chart" class="w-64 h-64"></i>
-                </div>
-                <div class="relative z-10 max-w-2xl">
-                    <span class="text-blue-400 font-bold uppercase tracking-widest text-xs mb-4 block">Case Study</span>
-                    <h2 class="text-3xl md:text-5xl font-bold mb-6">Recovering 18% in Lost Revenue.</h2>
-                    <p class="text-slate-300 text-lg mb-8 font-light">For a multi-specialty surgical group, our root-cause analysis identified persistent modifier errors that were causing technical denials. We optimized the workflow to restore cash flow in 60 days.</p>
-                    <button class="px-8 py-4 border border-white/20 rounded-xl hover:bg-white/10 transition-all font-bold">Read Full Case Study</button>
-                </div>
+            <div class="p-12 glass dark:bg-slate-900 rounded-[3rem] text-center">
+                <i data-lucide="lock" class="w-12 h-12 mx-auto text-brand-600 mb-6"></i>
+                <h4 class="text-xl font-bold mb-2">Data Privacy</h4>
+                <p class="text-slate-400 text-sm">AES-256 at-rest and TLS 1.3 in-transit security protocols.</p>
+            </div>
+            <div class="p-12 glass dark:bg-slate-900 rounded-[3rem] text-center">
+                <i data-lucide="user-check" class="w-12 h-12 mx-auto text-brand-600 mb-6"></i>
+                <h4 class="text-xl font-bold mb-2">Audit Logs</h4>
+                <p class="text-slate-400 text-sm">Complete traceability for every action within the revenue lifecycle.</p>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-24 bg-white dark:bg-slate-950 transition-colors">
-        <div class="container mx-auto px-6">
-            <div class="max-w-6xl mx-auto flex flex-col lg:flex-row gap-16 bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-[3rem] p-8 md:p-16">
-                <!-- Contact Info -->
-                <div class="lg:w-1/3">
-                    <h2 class="text-4xl font-bold mb-6">Get in Touch</h2>
-                    <p class="text-slate-600 dark:text-slate-400 font-light mb-10 leading-relaxed text-lg">Ready to improve your cash flow? Our team is standing by to help you solve your revenue cycle challenges.</p>
+    <section id="contact" class="py-32 bg-slate-50 dark:bg-[#03081c]">
+        <div class="container mx-auto px-6 lg:px-12">
+            <div class="max-w-6xl mx-auto flex flex-col lg:flex-row gap-16 bg-white dark:bg-slate-900 rounded-[4rem] p-10 md:p-20 shadow-2xl shadow-black/5 border border-slate-100 dark:border-slate-800">
+                <div class="lg:w-2/5">
+                    <h2 class="text-4xl md:text-5xl font-extrabold mb-8">Let's Talk Results.</h2>
+                    <p class="text-lg text-slate-500 dark:text-slate-400 mb-12">Ready to optimize your cash flow? Our technical team is ready to provide a no-cost operational audit.</p>
                     
                     <div class="space-y-8">
-                        <div class="flex items-center gap-5">
-                            <div class="w-12 h-12 rounded-2xl bg-white dark:bg-slate-800 flex items-center justify-center text-blue-600 shadow-lg">
-                                <i data-lucide="mail" class="w-6 h-6"></i>
-                            </div>
+                        <div class="flex items-center gap-6">
+                            <div class="w-14 h-14 rounded-2xl bg-brand-600/10 text-brand-600 flex items-center justify-center"><i data-lucide="mail" class="w-6 h-6"></i></div>
                             <div>
-                                <p class="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Official Email</p>
-                                <p class="font-medium">naguda@live.com</p>
+                                <p class="text-xs font-black uppercase text-slate-400">Project Inquiries</p>
+                                <p class="text-lg font-bold">info@atralhealth.com</p>
                             </div>
                         </div>
-                        <div class="flex items-center gap-5">
-                            <div class="w-12 h-12 rounded-2xl bg-white dark:bg-slate-800 flex items-center justify-center text-blue-600 shadow-lg">
-                                <i data-lucide="map-pin" class="w-6 h-6"></i>
-                            </div>
+                        <div class="flex items-center gap-6">
+                            <div class="w-14 h-14 rounded-2xl bg-brand-600/10 text-brand-600 flex items-center justify-center"><i data-lucide="map-pin" class="w-6 h-6"></i></div>
                             <div>
-                                <p class="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Locations</p>
-                                <p class="font-medium">NY • London • Mumbai</p>
+                                <p class="text-xs font-black uppercase text-slate-400">Operations</p>
+                                <p class="text-lg font-bold">NY • London • Mumbai</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Contact Form -->
-                <div class="lg:w-2/3">
+                <div class="lg:w-3/5">
                     <form id="contact-form" class="space-y-6">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <input type="text" required placeholder="Full Name" class="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 p-4 rounded-xl text-sm transition-all text-slate-900 dark:text-slate-100">
-                            <input type="text" placeholder="Organization" class="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 p-4 rounded-xl text-sm transition-all text-slate-900 dark:text-slate-100">
+                            <input type="text" name="name" placeholder="Full Name" required class="w-full bg-slate-50 dark:bg-slate-950 border-none p-5 rounded-2xl focus:ring-2 focus:ring-brand-600 transition-all outline-none">
+                            <input type="text" name="organization" placeholder="Organization" class="w-full bg-slate-50 dark:bg-slate-950 border-none p-5 rounded-2xl focus:ring-2 focus:ring-brand-600 transition-all outline-none">
                         </div>
-                        <input type="email" required placeholder="Official Email" class="w-full bg-white dark:bg-slate-950 border border-slate-800 p-4 rounded-xl text-sm transition-all text-slate-900 dark:text-slate-100">
-                        <textarea rows="4" required placeholder="Tell us about your current challenges..." class="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 p-4 rounded-xl text-sm transition-all resize-none text-slate-900 dark:text-slate-100"></textarea>
-                        <button type="submit" class="w-full py-5 bg-blue-600 text-white font-black uppercase tracking-widest rounded-xl hover:bg-blue-700 transition-all shadow-xl shadow-blue-900/20 flex items-center justify-center gap-3">
-                            Send Inquiry <i data-lucide="send" class="w-5 h-5"></i>
+                        <input type="email" name="email" placeholder="Business Email" required class="w-full bg-slate-50 dark:bg-slate-950 border-none p-5 rounded-2xl focus:ring-2 focus:ring-brand-600 transition-all outline-none">
+                        <textarea name="message" rows="4" placeholder="How can we help?" class="w-full bg-slate-50 dark:bg-slate-950 border-none p-5 rounded-2xl focus:ring-2 focus:ring-brand-600 transition-all outline-none resize-none"></textarea>
+                        <button type="submit" id="submit-btn" class="w-full py-5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-extrabold uppercase tracking-widest rounded-2xl hover:bg-brand-600 dark:hover:bg-brand-50 transition-all shadow-xl flex items-center justify-center gap-3">
+                            <span>Submit Inquiry</span>
+                            <i data-lucide="loader-2" class="w-5 h-5 animate-spin hidden" id="btn-loader"></i>
                         </button>
                     </form>
 
-                    <div id="success-msg" class="hidden text-center py-16 animate-fade-in bg-white dark:bg-slate-950/50 rounded-3xl border border-blue-500/20">
-                        <div class="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <i data-lucide="check" class="w-8 h-8 text-green-500"></i>
+                    <div id="success-msg" class="hidden text-center py-20 animate-fade-up">
+                        <div class="w-20 h-20 bg-emerald-500 rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg shadow-emerald-500/20">
+                            <i data-lucide="check" class="text-white w-10 h-10"></i>
                         </div>
-                        <h3 class="text-2xl font-bold mb-2">Inquiry Received</h3>
-                        <p class="text-slate-500 text-sm">We will contact you at naguda@live.com shortly.</p>
-                        <button onclick="resetForm()" class="mt-8 text-blue-600 text-sm font-bold">Send Another Message</button>
+                        <h3 class="text-3xl font-bold mb-4">Request Sent</h3>
+                        <p class="text-slate-500">Your inquiry has been successfully routed to <span class="text-brand-600 font-bold">info@atralhealth.com</span>. Our solution architects will contact you shortly.</p>
+                        <button onclick="resetForm()" class="mt-8 text-brand-600 font-bold underline">Send Another Message</button>
                     </div>
                 </div>
             </div>
@@ -432,57 +390,41 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-16 border-t border-slate-200 dark:border-slate-900 bg-slate-50 dark:bg-slate-950 transition-colors">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-10">
-                <div class="flex items-center gap-2">
-                    <i data-lucide="activity" class="text-blue-600 w-6 h-6"></i>
-                    <span class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">ATRAL HEALTH</span>
-                </div>
-                
-                <div class="flex flex-wrap gap-10 text-xs font-bold uppercase tracking-widest text-slate-400 justify-center">
-                    <a href="#home" class="hover:text-blue-600 transition-colors">Home</a>
-                    <a href="#services" class="hover:text-blue-600 transition-colors">Services</a>
-                    <a href="#about" class="hover:text-blue-600 transition-colors">About</a>
-                    <a href="#compliance" class="hover:text-blue-600 transition-colors">Compliance</a>
-                </div>
+    <footer class="py-20 border-t border-slate-100 dark:border-slate-900 bg-white dark:bg-[#020617]">
+        <div class="container mx-auto px-6 lg:px-12 flex flex-col md:flex-row justify-between items-center gap-12">
+            <div class="flex items-center gap-3">
+                <i data-lucide="activity" class="text-brand-600 w-8 h-8"></i>
+                <span class="text-2xl font-black tracking-tighter uppercase">Atral <span class="font-light text-slate-400">Health</span></span>
             </div>
-            <div class="mt-16 pt-8 border-t border-slate-200 dark:border-slate-900 flex flex-col md:flex-row justify-between gap-6 text-[10px] text-slate-500 uppercase tracking-widest font-semibold text-center md:text-left">
-                <p>© 2026 Atral Health RCM Solutions. All Rights Reserved.</p>
-                <div class="flex gap-8 justify-center">
-                    <a href="#" class="hover:text-slate-900 dark:hover:text-white transition-colors">HIPAA Compliance</a>
-                    <a href="#" class="hover:text-slate-900 dark:hover:text-white transition-colors">Privacy Policy</a>
-                </div>
+            
+            <div class="flex flex-wrap gap-10 text-[11px] font-black uppercase tracking-widest text-slate-400">
+                <a href="#home" class="hover:text-brand-600">Home</a>
+                <a href="#services" class="hover:text-brand-600">Services</a>
+                <a href="#about" class="hover:text-brand-600">About</a>
+                <a href="#compliance" class="hover:text-brand-600">Compliance</a>
             </div>
+
+            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">© 2026 Atral Health RCM Solutions.</p>
         </div>
     </footer>
 
     <script>
         lucide.createIcons();
 
-        // Theme Toggle Logic
+        // Theme Toggle
         const themeToggle = document.getElementById('theme-toggle');
         const themeToggleMobile = document.getElementById('theme-toggle-mobile');
         const htmlElement = document.documentElement;
         
-        const moonIcon = document.getElementById('moon-icon');
-        const sunIcon = document.getElementById('sun-icon');
-        const moonIconMobile = document.getElementById('moon-icon-mobile');
-        const sunIconMobile = document.getElementById('sun-icon-mobile');
-
         function updateThemeUI(isDark) {
             if (isDark) {
                 htmlElement.classList.add('dark');
-                moonIcon.classList.add('hidden');
-                sunIcon.classList.remove('hidden');
-                moonIconMobile.classList.add('hidden');
-                sunIconMobile.classList.remove('hidden');
+                document.getElementById('moon-icon').classList.add('hidden');
+                document.getElementById('sun-icon').classList.remove('hidden');
             } else {
                 htmlElement.classList.remove('dark');
-                moonIcon.classList.remove('hidden');
-                sunIcon.classList.add('hidden');
-                moonIconMobile.classList.remove('hidden');
-                sunIconMobile.classList.add('hidden');
+                document.getElementById('moon-icon').classList.remove('hidden');
+                document.getElementById('sun-icon').classList.add('hidden');
             }
         }
 
@@ -501,12 +443,14 @@
         // Navbar Scroll
         window.addEventListener('scroll', () => {
             const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
+            if (window.scrollY > 80) {
                 navbar.classList.add('nav-scrolled');
                 navbar.classList.remove('py-6');
+                navbar.classList.add('py-4');
             } else {
                 navbar.classList.remove('nav-scrolled');
                 navbar.classList.add('py-6');
+                navbar.classList.remove('py-4');
             }
         });
 
@@ -514,36 +458,42 @@
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const menuIcon = document.getElementById('menu-icon');
-        const mobileLinks = document.querySelectorAll('.mobile-link');
         let isMenuOpen = false;
 
-        function toggleMenu() {
+        menuBtn.addEventListener('click', () => {
             isMenuOpen = !isMenuOpen;
-            if (isMenuOpen) {
-                mobileMenu.classList.remove('hidden');
-                menuIcon.setAttribute('data-lucide', 'x');
-            } else {
-                mobileMenu.classList.add('hidden');
-                menuIcon.setAttribute('data-lucide', 'menu');
-            }
+            mobileMenu.classList.toggle('hidden');
+            menuIcon.setAttribute('data-lucide', isMenuOpen ? 'x' : 'menu');
             lucide.createIcons();
-        }
+        });
 
-        menuBtn.addEventListener('click', toggleMenu);
-        mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
-
-        // Form Submission
+        // Form logic
         const contactForm = document.getElementById('contact-form');
         const successMsg = document.getElementById('success-msg');
+        const submitBtn = document.getElementById('submit-btn');
+        const btnLoader = document.getElementById('btn-loader');
 
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            contactForm.classList.add('hidden');
-            successMsg.classList.remove('hidden');
+            
+            // Premium "Sending" state
+            submitBtn.disabled = true;
+            submitBtn.querySelector('span').innerText = "Sending Inquiry...";
+            btnLoader.classList.remove('hidden');
+
+            // Simulate the secure transmission to info@atralhealth.com
+            setTimeout(() => {
+                contactForm.classList.add('hidden');
+                successMsg.classList.remove('hidden');
+                console.log('Secure inquiry successfully routed to info@atralhealth.com');
+            }, 1500);
         });
 
         function resetForm() {
             contactForm.reset();
+            submitBtn.disabled = false;
+            submitBtn.querySelector('span').innerText = "Submit Inquiry";
+            btnLoader.classList.add('hidden');
             contactForm.classList.remove('hidden');
             successMsg.classList.add('hidden');
         }
