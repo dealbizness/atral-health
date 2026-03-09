@@ -1,660 +1,724 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth dark">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atral Health | Enterprise Healthcare Operations & RCM</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            50: '#f8fafc',
-                            100: '#f1f5f9',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            700: '#1d4ed8',
-                            900: '#0f172a',
-                            950: '#020617',
-                        }
-                    },
-                    letterSpacing: {
-                        'tighter': '-0.05em',
-                        'tightest': '-0.07em',
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body { 
-            font-family: 'Inter', sans-serif;
-            -webkit-font-smoothing: antialiased;
-            text-rendering: optimizeLegibility;
-        }
-        
-        @keyframes reveal-up {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-reveal {
-            animation: reveal-up 1.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atral Health | Enterprise Healthcare Operations & RCM</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   THEME TOKENS — All colors live here ONLY
+═══════════════════════════════════════════════ */
+:root {
+  --teal:        #0E7C86;
+  --teal-lt:     #13A4B0;
+  --teal-dim:    rgba(14,124,134,0.12);
+  --gold:        #C8963E;
+  --gold-lt:     #E0B060;
+  --r-xs: 6px; --r-sm: 10px; --r-md: 16px; --r-lg: 24px; --r-xl: 36px;
 
-        .glass-header {
-            backdrop-filter: blur(12px) saturate(160%);
-            background: rgba(255, 255, 255, 0.8);
-        }
-        .dark .glass-header {
-            background: rgba(2, 6, 23, 0.8);
-        }
+  /* Light */
+  --bg:           #F2F5FA;
+  --bg-alt:       #E8EBF2;
+  --surface:      #FFFFFF;
+  --surface-2:    #F7F9FC;
+  --surface-3:    #EEF1F7;
+  --text-1:       #0B1F3A;
+  --text-2:       #3A5070;
+  --text-3:       #7A90AA;
+  --border:       rgba(11,31,58,0.10);
+  --border-s:     rgba(11,31,58,0.18);
+  --dark-s:       #0B1F3A;
+  --dark-s2:      #112849;
+  --nav-bg:       rgba(255,255,255,0.96);
+  --nav-border:   rgba(11,31,58,0.10);
+  --nav-shadow:   0 2px 24px rgba(11,31,58,0.08);
+  --sh-sm:        0 1px 4px rgba(11,31,58,0.06),0 4px 16px rgba(11,31,58,0.07);
+  --sh-md:        0 2px 8px rgba(11,31,58,0.06),0 12px 32px rgba(11,31,58,0.09);
+  --sh-lg:        0 8px 24px rgba(11,31,58,0.10),0 32px 64px rgba(11,31,58,0.14);
+  --tog-track:    rgba(14,124,134,0.15);
+  --tog-border:   #0E7C86;
+  --tog-thumb:    #0E7C86;
+}
+html.dark {
+  --bg:           #0C1018;
+  --bg-alt:       #080C12;
+  --surface:      #141921;
+  --surface-2:    #1A2130;
+  --surface-3:    #202838;
+  --text-1:       #E6EDF8;
+  --text-2:       #97ACC4;
+  --text-3:       #546778;
+  --border:       rgba(255,255,255,0.07);
+  --border-s:     rgba(255,255,255,0.14);
+  --dark-s:       #0B1F3A;
+  --dark-s2:      #112849;
+  --nav-bg:       rgba(12,16,24,0.96);
+  --nav-border:   rgba(255,255,255,0.07);
+  --nav-shadow:   0 2px 24px rgba(0,0,0,0.4);
+  --sh-sm:        0 1px 4px rgba(0,0,0,0.3),0 4px 16px rgba(0,0,0,0.35);
+  --sh-md:        0 2px 8px rgba(0,0,0,0.3),0 12px 32px rgba(0,0,0,0.4);
+  --sh-lg:        0 8px 24px rgba(0,0,0,0.4),0 32px 64px rgba(0,0,0,0.5);
+  --tog-track:    rgba(224,176,96,0.12);
+  --tog-border:   #E0B060;
+  --tog-thumb:    #E0B060;
+}
 
-        .card-shadow {
-            box-shadow: 0 0 0 1px rgba(0,0,0,0.03), 0 2px 4px rgba(0,0,0,0.05), 0 12px 24px rgba(0,0,0,0.05);
-        }
-        .dark .card-shadow {
-            box-shadow: 0 0 0 1px rgba(255,255,255,0.05), 0 20px 40px rgba(0,0,0,0.4);
-        }
+/* ═══════════════════════════════════════════════ BASE */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Barlow',sans-serif;color:var(--text-1);
+  background:var(--bg);-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;transition:background .35s,color .35s;
+}
+h1,h2,h3,h4{
+  font-family:'Barlow Condensed',sans-serif;font-weight:900;
+  letter-spacing:-0.01em;line-height:1.0;color:var(--text-1);
+  text-transform:uppercase;transition:color .35s;
+}
+a{text-decoration:none}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--teal);border-radius:10px}
 
-        .hero-gradient {
-            background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.08), transparent 40%),
-                        radial-gradient(circle at bottom left, rgba(99, 102, 241, 0.08), transparent 40%);
-        }
+/* Global transition for theme */
+nav,section,footer,.svc-card,.value-item,.about-mini,
+.comp-card,.contact-form-wrap,.trust-strip,.ind-card,
+.cert-tile,.form-control,.cert-showcase,.metric-tile,
+.hero-card,.tag,.c-icon,.v-icon,.svc-icon,.footer-brand-name{
+  transition:background .35s,border-color .35s,box-shadow .35s,color .35s;
+}
 
-        .input-premium {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .input-premium:focus {
-            transform: scale(1.005);
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
-        }
+/* ═══════════════════════════════════════════════ LAYOUT */
+.container{max-width:1280px;margin:0 auto;padding:0 48px}
+section{padding:104px 0}
 
-        .text-balance { text-wrap: balance; }
-        
-        /* Hide scrollbar for cleaner look */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
-    </style>
+/* ═══════════════════════════════════════════════ NAV */
+#navbar{position:fixed;top:0;left:0;width:100%;z-index:200;padding:22px 0;transition:all .4s}
+#navbar.scrolled{background:var(--nav-bg);backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--nav-border);padding:14px 0;box-shadow:var(--nav-shadow)}
+.nav-inner{max-width:1280px;margin:0 auto;padding:0 48px;display:flex;align-items:center;justify-content:space-between}
+
+.logo{display:flex;align-items:center;gap:12px}
+.logo-icon{width:40px;height:40px;border-radius:10px;background:var(--teal);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 14px rgba(14,124,134,.4)}
+.logo-icon svg{color:#fff}
+.logo-name{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;letter-spacing:.02em;text-transform:uppercase;color:#fff;line-height:1;transition:color .35s}
+.logo-sub{font-size:9px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.5);display:block;margin-top:3px;transition:color .35s}
+#navbar.scrolled .logo-name{color:var(--text-1)}
+#navbar.scrolled .logo-sub{color:var(--text-3)}
+
+.nav-links{display:flex;align-items:center;gap:30px}
+.nav-links>a{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.75);transition:color .2s}
+.nav-links>a:hover{color:#fff}
+#navbar.scrolled .nav-links>a{color:var(--text-2)}
+#navbar.scrolled .nav-links>a:hover{color:var(--text-1)}
+
+.nav-cta{background:var(--teal)!important;color:#fff!important;padding:11px 24px;border-radius:var(--r-xs);font-size:12px!important;font-weight:700!important;letter-spacing:.08em;text-transform:uppercase;box-shadow:0 4px 14px rgba(14,124,134,.35);transition:background .2s,transform .2s!important}
+.nav-cta:hover{background:var(--teal-lt)!important;transform:translateY(-1px)}
+
+/* Theme toggle */
+.theme-btn{width:48px;height:28px;background:var(--tog-track);border:1.5px solid var(--tog-border);border-radius:20px;cursor:pointer;position:relative;flex-shrink:0;outline:none;transition:background .35s,border-color .35s}
+.theme-thumb{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:var(--tog-thumb);display:flex;align-items:center;justify-content:center;transition:transform .35s cubic-bezier(.34,1.56,.64,1),background .35s}
+html.dark .theme-thumb{transform:translateX(20px)}
+.icon-light,.icon-dark{width:11px;height:11px;pointer-events:none}
+.icon-light{display:none}
+html.dark .icon-light{display:block}
+html.dark .icon-dark{display:none}
+
+/* Hamburger */
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:6px;flex-direction:column;gap:5px}
+.hamburger span{display:block;width:24px;height:2.5px;background:rgba(255,255,255,.85);border-radius:2px;transition:background .35s}
+#navbar.scrolled .hamburger span{background:var(--text-1)}
+
+/* Mobile nav */
+.mobile-nav{display:none;position:fixed;inset:0;z-index:190;background:var(--surface);flex-direction:column;padding:100px 40px 40px;gap:8px}
+.mobile-nav.open{display:flex}
+.mobile-nav a{font-family:'Barlow Condensed',sans-serif;font-size:42px;font-weight:900;text-transform:uppercase;color:var(--text-1);opacity:.65;transition:opacity .2s}
+.mobile-nav a:hover{opacity:1}
+.mob-close{position:absolute;top:22px;right:26px;background:none;border:none;font-size:30px;line-height:1;color:var(--text-1);cursor:pointer}
+
+/* ═══════════════════════════════════════════════ HERO */
+.hero{min-height:100vh;background:var(--dark-s);position:relative;overflow:hidden;display:flex;align-items:center;padding:120px 0 80px}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:64px 64px}
+.hero-glow-a{position:absolute;pointer-events:none;width:700px;height:700px;top:-150px;right:-100px;background:radial-gradient(circle,rgba(14,124,134,.22) 0%,transparent 65%)}
+.hero-glow-b{position:absolute;pointer-events:none;width:500px;height:500px;bottom:0;left:5%;background:radial-gradient(circle,rgba(200,150,62,.10) 0%,transparent 65%)}
+.hero-inner{max-width:1280px;margin:0 auto;padding:0 48px;position:relative;z-index:1;display:grid;grid-template-columns:1fr 400px;gap:80px;align-items:center}
+
+.hero-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(14,124,134,.12);border:1px solid rgba(14,124,134,.35);border-radius:40px;padding:8px 18px;margin-bottom:28px}
+.hero-badge-dot{width:8px;height:8px;border-radius:50%;background:var(--teal-lt);animation:pulse-dot 2.5s infinite}
+@keyframes pulse-dot{0%,100%{box-shadow:0 0 0 0 rgba(19,164,176,.7)}50%{box-shadow:0 0 0 8px rgba(19,164,176,0)}}
+.hero-badge span{font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--teal-lt)}
+.hero h1{font-size:clamp(56px,8vw,108px);font-weight:900;color:#fff;line-height:.92;letter-spacing:-.01em;margin-bottom:28px;text-transform:uppercase}
+.hero h1 .accent{color:var(--teal-lt)}
+.hero-desc{font-size:17px;line-height:1.75;color:rgba(255,255,255,.55);max-width:540px;margin-bottom:40px;font-weight:400}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:60px}
+
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:#fff;padding:15px 32px;border-radius:var(--r-xs);font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;box-shadow:0 4px 20px rgba(14,124,134,.45);transition:background .2s,transform .2s,box-shadow .2s}
+.btn-primary:hover{background:var(--teal-lt);transform:translateY(-2px);box-shadow:0 8px 28px rgba(14,124,134,.5)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;border:1.5px solid rgba(255,255,255,.25);color:rgba(255,255,255,.8);padding:15px 28px;border-radius:var(--r-xs);font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;transition:border-color .2s,color .2s}
+.btn-ghost:hover{border-color:rgba(255,255,255,.65);color:#fff}
+
+.hero-stats{display:flex}
+.hero-stat{padding:0 32px 0 0}
+.hero-stat:first-child{padding-left:0}
+.hero-stat+.hero-stat{border-left:1px solid rgba(255,255,255,.1);padding-left:32px}
+.hero-stat-val{font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:900;color:#fff;line-height:1;letter-spacing:-.02em}
+.hero-stat-lbl{font-size:11px;font-weight:500;color:rgba(255,255,255,.42);letter-spacing:.08em;text-transform:uppercase;margin-top:4px}
+
+.hero-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:var(--r-lg);backdrop-filter:blur(12px);padding:32px}
+.hero-card-label{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--teal-lt);margin-bottom:24px}
+.cert-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+.cert-row:last-child{border-bottom:none}
+.cert-row-name{font-size:14px;font-weight:600;color:#fff}
+.cert-pill{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;border-radius:20px;background:rgba(14,124,134,.2);color:var(--teal-lt);border:1px solid rgba(14,124,134,.35)}
+.cert-pill.gold{background:rgba(200,150,62,.15);color:var(--gold-lt);border-color:rgba(200,150,62,.3)}
+
+/* ═══════════════════════════════════════════════ SECTION HELPERS */
+.label{font-size:11px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:14px}
+.section-title{font-size:clamp(36px,4.5vw,58px);font-weight:900;text-transform:uppercase;color:var(--text-1);line-height:1.0;margin-bottom:18px}
+.section-desc{font-size:16px;line-height:1.75;color:var(--text-3);max-width:520px;font-weight:400}
+.sec-head{margin-bottom:60px}
+.sec-head.center{text-align:center}
+.sec-head.center .section-desc{margin:0 auto}
+
+/* ═══════════════════════════════════════════════ ABOUT */
+#about{background:var(--bg)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-big-card{background:var(--dark-s);border-radius:var(--r-xl);padding:48px;position:relative;overflow:hidden;margin-bottom:16px}
+.about-big-card::after{content:'';position:absolute;top:-60px;right:-60px;width:240px;height:240px;background:radial-gradient(circle,rgba(14,124,134,.35),transparent 70%)}
+.about-big-label{font-size:10px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--teal-lt);margin-bottom:20px;position:relative;z-index:1}
+.about-big-num{font-family:'Barlow Condensed',sans-serif;font-size:80px;font-weight:900;color:#fff;line-height:1;letter-spacing:-.02em;position:relative;z-index:1}
+.about-big-num sup{font-size:40px}
+.about-big-desc{font-size:14px;color:rgba(255,255,255,.5);margin-top:10px;line-height:1.65;position:relative;z-index:1}
+.about-mini-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.about-mini{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:22px;box-shadow:var(--sh-sm)}
+.about-mini-val{font-family:'Barlow Condensed',sans-serif;font-size:30px;font-weight:900;color:var(--text-1);line-height:1}
+.about-mini-lbl{font-size:12px;color:var(--text-3);margin-top:4px}
+.values{display:flex;flex-direction:column;gap:16px;margin-top:36px}
+.value-item{display:flex;gap:18px;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:22px;box-shadow:var(--sh-sm)}
+.value-item:hover{box-shadow:var(--sh-md)}
+.v-icon{width:44px;height:44px;flex-shrink:0;border-radius:10px;display:flex;align-items:center;justify-content:center}
+.v-icon.t{background:var(--teal-dim);color:var(--teal)}
+.v-icon.g{background:rgba(200,150,62,.10);color:var(--gold)}
+.v-icon.n{background:var(--surface-3);color:var(--text-2)}
+.v-title{font-size:15px;font-weight:700;color:var(--text-1);margin-bottom:4px;font-family:'Barlow',sans-serif;text-transform:none;letter-spacing:0}
+.v-desc{font-size:13px;color:var(--text-3);line-height:1.65}
+
+/* ═══════════════════════════════════════════════ SERVICES */
+#services{background:var(--surface)}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.svc-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:36px;position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s,border-color .3s,background .35s}
+.svc-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--teal);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.svc-card:hover{transform:translateY(-6px);box-shadow:var(--sh-lg);border-color:rgba(14,124,134,.25)}
+.svc-card:hover::after{transform:scaleX(1)}
+.svc-num{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--teal);margin-bottom:20px;display:block}
+.svc-icon{width:52px;height:52px;border-radius:var(--r-xs);background:var(--surface-3);color:var(--text-2);display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+.svc-title{font-size:20px;font-weight:900;text-transform:uppercase;color:var(--text-1);margin-bottom:10px;font-family:'Barlow Condensed',sans-serif;letter-spacing:-.01em;line-height:1.1}
+.svc-desc{font-size:13px;line-height:1.7;color:var(--text-3);margin-bottom:20px}
+.svc-tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{font-size:11px;font-weight:500;padding:5px 12px;border-radius:20px;border:1px solid var(--border);color:var(--text-3);background:var(--surface-2)}
+
+/* ═══════════════════════════════════════════════ INDUSTRIES */
+#industries{background:var(--dark-s)}
+#industries .label{color:var(--teal-lt)}
+#industries .section-title{color:#fff}
+#industries .section-desc{color:rgba(255,255,255,.48)}
+.ind-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:56px}
+.ind-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:var(--r-lg);padding:28px 24px;transition:background .3s,border-color .3s,transform .3s}
+.ind-card:hover{background:rgba(14,124,134,.12);border-color:rgba(14,124,134,.3);transform:translateY(-4px)}
+.ind-icon{width:46px;height:46px;border-radius:10px;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;color:var(--teal-lt);margin-bottom:18px}
+.ind-title{font-size:15px;font-weight:700;color:#fff;margin-bottom:8px;font-family:'Barlow',sans-serif;text-transform:none;letter-spacing:0;line-height:1.3}
+.ind-desc{font-size:12px;color:rgba(255,255,255,.42);line-height:1.65}
+
+/* ═══════════════════════════════════════════════ COMPLIANCE */
+#compliance{background:var(--bg-alt)}
+.comp-layout{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.comp-cards{display:flex;flex-direction:column;gap:18px}
+.comp-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:28px 32px;display:flex;gap:22px;align-items:flex-start;box-shadow:var(--sh-sm)}
+.comp-icon{width:50px;height:50px;flex-shrink:0;border-radius:10px;background:var(--teal-dim);color:var(--teal);display:flex;align-items:center;justify-content:center}
+.comp-title{font-size:16px;font-weight:700;color:var(--text-1);margin-bottom:6px;font-family:'Barlow',sans-serif;text-transform:none;letter-spacing:0}
+.comp-desc{font-size:13px;color:var(--text-3);line-height:1.65}
+.comp-list{margin-top:10px;display:flex;flex-direction:column;gap:5px}
+.comp-list li{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-3);list-style:none}
+.comp-list li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--teal);flex-shrink:0}
+.cert-showcase{background:var(--dark-s);border-radius:var(--r-xl);padding:36px;margin-bottom:20px}
+.cert-showcase-lbl{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--teal-lt);margin-bottom:24px}
+.cert-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.cert-tile{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:var(--r-md);padding:20px;text-align:center;transition:background .3s}
+.cert-tile:hover{background:rgba(14,124,134,.15)}
+.cert-tile-name{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:900;color:#fff;text-transform:uppercase}
+.cert-tile-sub{font-size:11px;color:rgba(255,255,255,.38);margin-top:4px}
+.trust-strip{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:20px 26px;display:flex;align-items:center;gap:16px;box-shadow:var(--sh-sm)}
+.trust-strip-icon{color:var(--gold);flex-shrink:0}
+.trust-strip-title{font-size:14px;font-weight:700;color:var(--text-1)}
+.trust-strip-sub{font-size:12px;color:var(--text-3);margin-top:2px}
+
+/* ═══════════════════════════════════════════════ CASE STUDY */
+#case-study{background:var(--surface)}
+.case-card{background:var(--dark-s);border-radius:var(--r-xl);padding:64px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;overflow:hidden}
+.case-card::before{content:'';position:absolute;top:-80px;right:-80px;width:420px;height:420px;background:radial-gradient(circle,rgba(14,124,134,.18),transparent 70%);pointer-events:none}
+.case-lbl{font-size:10px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--teal-lt);display:block;margin-bottom:14px}
+.case-title{font-size:36px;font-weight:900;text-transform:uppercase;color:#fff;line-height:1.1;margin-bottom:18px}
+.case-desc{font-size:15px;color:rgba(255,255,255,.48);line-height:1.75}
+.case-btn{margin-top:32px}
+.metrics-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;position:relative;z-index:1}
+.metric-tile{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);border-radius:var(--r-md);padding:26px}
+.metric-val{font-family:'Barlow Condensed',sans-serif;font-size:44px;font-weight:900;color:#fff;line-height:1}
+.metric-val .u{font-size:24px;color:var(--teal-lt)}
+.metric-lbl{font-size:12px;color:rgba(255,255,255,.38);margin-top:6px;letter-spacing:.06em;text-transform:uppercase}
+
+/* ═══════════════════════════════════════════════ CONTACT */
+#contact{background:var(--bg)}
+.contact-grid{display:grid;grid-template-columns:400px 1fr;gap:80px;align-items:start}
+.contact-side-title{font-size:18px;font-weight:700;color:var(--text-1);margin-bottom:6px;font-family:'Barlow',sans-serif;text-transform:none;letter-spacing:0}
+.contact-side-desc{font-size:14px;color:var(--text-3);line-height:1.7;margin-bottom:36px}
+.c-info-item{display:flex;gap:16px;align-items:flex-start;padding:20px 0;border-bottom:1px solid var(--border)}
+.c-info-item:last-child{border-bottom:none}
+.c-icon{width:42px;height:42px;flex-shrink:0;background:var(--teal-dim);color:var(--teal);border-radius:10px;display:flex;align-items:center;justify-content:center}
+.c-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.2em;color:var(--text-3);margin-bottom:3px}
+.c-value{font-size:14px;font-weight:600;color:var(--text-1)}
+.contact-form-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);padding:48px;box-shadow:var(--sh-lg)}
+.form-title{font-size:22px;font-weight:700;color:var(--text-1);margin-bottom:6px;font-family:'Barlow',sans-serif;text-transform:none;letter-spacing:0}
+.form-subtitle{font-size:14px;color:var(--text-3);margin-bottom:32px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.form-group{margin-bottom:18px}
+.form-label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--text-3);margin-bottom:8px}
+.form-control{width:100%;background:var(--surface-2);border:1.5px solid var(--border);border-radius:var(--r-xs);padding:13px 16px;font-family:'Barlow',sans-serif;font-size:14px;font-weight:400;color:var(--text-1);outline:none;transition:border-color .2s,box-shadow .2s,background .35s,color .35s}
+.form-control:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(14,124,134,.12);background:var(--surface)}
+.form-control::placeholder{color:var(--text-3)}
+textarea.form-control{resize:vertical;min-height:120px}
+.btn-submit{width:100%;background:var(--dark-s);color:#fff;border:none;padding:16px 32px;border-radius:var(--r-xs);font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .2s,transform .2s}
+.btn-submit:hover{background:var(--teal);transform:translateY(-2px)}
+.form-note{font-size:12px;color:var(--text-3);text-align:center;margin-top:14px}
+#success-msg{display:none;text-align:center;padding:48px 24px}
+.success-icon{width:72px;height:72px;border-radius:50%;background:var(--teal-dim);color:var(--teal);display:flex;align-items:center;justify-content:center;margin:0 auto 22px}
+#success-msg h3{font-size:24px;font-weight:900;color:var(--text-1);text-transform:uppercase;margin-bottom:8px}
+#success-msg p{font-size:14px;color:var(--text-3)}
+#success-msg button{margin-top:24px;background:none;border:1.5px solid var(--border);padding:10px 24px;border-radius:var(--r-xs);font-family:'Barlow',sans-serif;font-size:13px;color:var(--text-1);cursor:pointer;transition:background .2s,border-color .2s}
+#success-msg button:hover{background:var(--surface-2);border-color:var(--teal)}
+
+/* ═══════════════════════════════════════════════ FOOTER */
+footer{background:#080D14;padding:72px 0 32px}
+html.dark footer{background:#060A10}
+.footer-top{display:grid;grid-template-columns:300px repeat(3,1fr);gap:48px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.07)}
+.footer-brand-name{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;text-transform:uppercase;color:#fff;letter-spacing:.04em;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.f-logo-mark{width:34px;height:34px;border-radius:8px;background:var(--teal);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.footer-tagline{font-size:13px;color:rgba(255,255,255,.38);line-height:1.7}
+.footer-col-title{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:18px}
+.footer-links{display:flex;flex-direction:column;gap:12px}
+.footer-links a{font-size:13px;color:rgba(255,255,255,.42);transition:color .2s}
+.footer-links a:hover{color:#fff}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:28px;flex-wrap:wrap;gap:14px}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.25)}
+.footer-legal{display:flex;gap:24px}
+.footer-legal a{font-size:12px;color:rgba(255,255,255,.3);transition:color .2s}
+.footer-legal a:hover{color:rgba(255,255,255,.7)}
+
+/* ═══════════════════════════════════════════════ ANIMATIONS */
+.fade-up{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+/* ═══════════════════════════════════════════════ RESPONSIVE */
+@media(max-width:1100px){
+  .hero-inner{grid-template-columns:1fr}
+  .hero-card{display:none}
+  .about-grid,.comp-layout,.contact-grid{grid-template-columns:1fr}
+  .svc-grid{grid-template-columns:1fr 1fr}
+  .ind-grid{grid-template-columns:1fr 1fr}
+  .case-card{grid-template-columns:1fr;gap:48px}
+  .footer-top{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  section{padding:72px 0}
+  .container{padding:0 22px}
+  .nav-inner{padding:0 22px}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .svc-grid,.ind-grid,.cert-grid-2{grid-template-columns:1fr}
+  .case-card{padding:32px}
+  .metrics-grid{grid-template-columns:1fr 1fr}
+  .form-row{grid-template-columns:1fr}
+  .contact-form-wrap{padding:28px}
+  .footer-top{grid-template-columns:1fr}
+  .hero-inner{padding:0 22px}
+  .hero-stats{flex-wrap:wrap;gap:20px}
+  .about-mini-row{grid-template-columns:1fr 1fr}
+}
+</style>
 </head>
-<body class="bg-white dark:bg-brand-950 text-slate-900 dark:text-slate-100 transition-colors duration-700 selection:bg-brand-600 selection:text-white">
+<body>
 
-    <!-- Navigation -->
-    <nav id="navbar" class="fixed w-full z-50 transition-all duration-500 py-8">
-        <div class="container mx-auto px-6 lg:px-20 flex justify-between items-center">
-            <div class="flex items-center gap-4 group cursor-pointer" onclick="window.scrollTo(0,0)">
-                <div class="w-12 h-12 bg-brand-600 rounded-2xl flex items-center justify-center shadow-2xl shadow-brand-600/30 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
-                    <i data-lucide="activity" class="text-white w-7 h-7 stroke-[2.5px]"></i>
-                </div>
-                <div class="flex flex-col">
-                    <span class="text-2xl font-[900] tracking-tightest leading-none text-slate-950 dark:text-white">ATRAL</span>
-                    <span class="text-[10px] font-black tracking-[0.4em] text-slate-400 uppercase leading-none mt-1">Health</span>
-                </div>
-            </div>
-
-            <div class="hidden xl:flex items-center gap-10 text-[10px] font-extrabold uppercase tracking-[0.2em]">
-                <a href="#about" class="hover:text-brand-600 transition-colors">Why Atral</a>
-                <a href="#services" class="hover:text-brand-600 transition-colors">Services</a>
-                <a href="#industries" class="hover:text-brand-600 transition-colors">Industries</a>
-                <a href="#compliance" class="hover:text-brand-600 transition-colors">Compliance</a>
-                <a href="#case-study" class="hover:text-brand-600 transition-colors">Case Study</a>
-                
-                <div class="flex items-center gap-6 pl-6 border-l border-slate-200 dark:border-slate-800">
-                    <button id="theme-toggle" class="p-3 rounded-xl bg-slate-50 dark:bg-slate-900 hover:scale-105 transition-all">
-                        <i data-lucide="sun" id="sun-icon" class="hidden w-4 h-4 text-brand-500"></i>
-                        <i data-lucide="moon" id="moon-icon" class="w-4 h-4 text-brand-500"></i>
-                    </button>
-                    <a href="#contact" class="bg-brand-900 dark:bg-white text-white dark:text-brand-950 px-8 py-3 rounded-xl hover:bg-brand-600 dark:hover:bg-brand-50 shadow-xl transition-all active:scale-95 text-[9px]">
-                        Consultation
-                    </a>
-                </div>
-            </div>
-
-            <button class="xl:hidden p-4 bg-slate-50 dark:bg-slate-900 rounded-2xl" id="menu-btn">
-                <i data-lucide="menu" id="menu-icon" class="w-6 h-6"></i>
-            </button>
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a class="logo" href="#">
+      <div class="logo-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      </div>
+      <div>
+        <span class="logo-name">Atral Health</span>
+        <span class="logo-sub">Healthcare Operations</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#about">Why Atral</a>
+      <a href="#services">Services</a>
+      <a href="#industries">Industries</a>
+      <a href="#compliance">Compliance</a>
+      <a href="#case-study">Case Study</a>
+      <button class="theme-btn" id="theme-btn" aria-label="Toggle theme">
+        <div class="theme-thumb">
+          <svg class="icon-dark" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-light" viewBox="0 0 24 24" fill="none" stroke="#080D14" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
         </div>
-    </nav>
-
-    <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu" class="fixed inset-0 z-40 bg-white dark:bg-brand-950 pt-32 px-10 hidden xl:hidden">
-        <div class="flex flex-col gap-8 text-3xl font-black tracking-tightest">
-            <a href="#about" class="mobile-link">Why Atral</a>
-            <a href="#services" class="mobile-link">Services</a>
-            <a href="#industries" class="mobile-link">Industries</a>
-            <a href="#compliance" class="mobile-link">Security</a>
-            <a href="#contact" class="mobile-link text-brand-600">Contact</a>
-        </div>
+      </button>
+      <a href="#contact" class="nav-cta">Get Consultation</a>
     </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden hero-gradient">
-        <div class="container mx-auto px-6 lg:px-20">
-            <div class="max-w-6xl animate-reveal">
-                <div class="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-brand-600/5 border border-brand-600/10 text-brand-600 text-[10px] font-black uppercase tracking-[0.3em] mb-12">
-                    <span class="w-2 h-2 rounded-full bg-brand-600 animate-pulse"></span>
-                    Next-Generation Healthcare Operations
-                </div>
-                
-                <h1 class="text-6xl md:text-8xl lg:text-[100px] font-[900] tracking-tightest mb-10 leading-[0.85] text-balance">
-                    Bridging Clinical <br>
-                    <span class="text-brand-600">Intelligence.</span>
-                </h1>
-                
-                <p class="text-xl md:text-2xl text-slate-500 dark:text-slate-400 mb-16 leading-snug max-w-4xl font-medium tracking-tight">
-                    Healthcare systems worldwide face unprecedented pressure—rising costs, complex regulations, and growing patient expectations. Atral Health bridges the gap between clinical excellence and operational intelligence.
-                </p>
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobile-nav">
+  <button class="mob-close" id="mob-close">✕</button>
+  <a href="#about">Why Atral</a>
+  <a href="#services">Services</a>
+  <a href="#industries">Industries</a>
+  <a href="#compliance">Compliance</a>
+  <a href="#case-study">Case Study</a>
+  <a href="#contact" style="color:var(--teal)">Get Consultation</a>
+</div>
 
-                <div class="flex flex-col sm:flex-row gap-6 mb-24">
-                    <a href="#contact" class="px-12 py-6 bg-brand-600 text-white rounded-2xl font-[900] uppercase tracking-widest shadow-3xl shadow-brand-600/30 hover:bg-brand-700 hover:-translate-y-2 transition-all flex items-center justify-center gap-4 group">
-                        Inquire About Project <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-2 transition-transform"></i>
-                    </a>
-                    <a href="#services" class="px-12 py-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl font-[900] uppercase tracking-widest hover:bg-slate-50 dark:hover:bg-slate-800 transition-all text-center">
-                        Our Service Ecosystem
-                    </a>
-                </div>
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        <span>Next-Generation Healthcare Operations</span>
+      </div>
+      <h1>Bridging Clinical<br><span class="accent">Intelligence.</span></h1>
+      <p class="hero-desc">Healthcare systems worldwide face unprecedented pressure — rising costs, complex regulations, and growing patient expectations. Atral Health bridges the gap between clinical excellence and operational intelligence.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-primary">Request a Consultation <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="#services" class="btn-ghost">Our Services</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="hero-stat-val">98%</div><div class="hero-stat-lbl">Coding Accuracy</div></div>
+        <div class="hero-stat"><div class="hero-stat-val">32%</div><div class="hero-stat-lbl">Revenue Improvement</div></div>
+        <div class="hero-stat"><div class="hero-stat-val">500+</div><div class="hero-stat-lbl">Enterprise Clients</div></div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-label">Certifications &amp; Standards</div>
+      <div class="cert-row"><span class="cert-row-name">AAPC Certification</span><span class="cert-pill">Certified</span></div>
+      <div class="cert-row"><span class="cert-row-name">HIPAA Compliance</span><span class="cert-pill">Sovereign</span></div>
+      <div class="cert-row"><span class="cert-row-name">SOC 2 Type II</span><span class="cert-pill gold">Audited</span></div>
+      <div class="cert-row"><span class="cert-row-name">ISO 27001</span><span class="cert-pill">Active</span></div>
+      <div class="cert-row"><span class="cert-row-name">Global Privacy Framework</span><span class="cert-pill gold">Compliant</span></div>
+    </div>
+  </div>
+</section>
 
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 opacity-40 grayscale hover:grayscale-0 transition-all duration-1000">
-                    <div class="flex flex-col gap-2">
-                        <span class="text-3xl font-black text-brand-600">AAPC</span>
-                        <span class="text-[9px] font-black uppercase tracking-widest">Certified Auditors</span>
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <span class="text-3xl font-black text-brand-600">HIPAA</span>
-                        <span class="text-[9px] font-black uppercase tracking-widest">Sovereign Data</span>
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <span class="text-3xl font-black text-brand-600">SOC 2</span>
-                        <span class="text-[9px] font-black uppercase tracking-widest">Type II Audited</span>
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <span class="text-3xl font-black text-brand-600">98%</span>
-                        <span class="text-[9px] font-black uppercase tracking-widest">Coding Accuracy</span>
-                    </div>
-                </div>
-            </div>
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="fade-up">
+        <div class="about-big-card">
+          <div class="about-big-label">Operational Performance</div>
+          <div class="about-big-num">32<sup>%</sup></div>
+          <div class="about-big-desc">Average revenue cycle improvement across our enterprise healthcare clients globally.</div>
         </div>
-    </section>
-
-    <!-- Why Us Section -->
-    <section id="why-us" class="py-32 bg-slate-50 dark:bg-brand-950/50">
-        <div class="container mx-auto px-6 lg:px-20">
-            <div class="text-center mb-24">
-                <span class="text-brand-600 font-black uppercase tracking-[0.5em] text-[10px] mb-6 block">The Atral Advantage</span>
-                <h2 class="text-5xl lg:text-7xl font-[900] tracking-tightest">Outcome-Based Partnerships.</h2>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="p-10 bg-white dark:bg-slate-900 rounded-[3rem] card-shadow border border-slate-100 dark:border-slate-800">
-                    <div class="w-16 h-16 bg-blue-500/10 rounded-2xl flex items-center justify-center text-brand-600 mb-8"><i data-lucide="users" class="w-8 h-8"></i></div>
-                    <h3 class="text-2xl font-black mb-4 tracking-tight">Industry Expertise</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Our leadership team brings decades of experience in healthcare operations, clinical documentation, and digital transformation.</p>
-                </div>
-                <div class="p-10 bg-white dark:bg-slate-900 rounded-[3rem] card-shadow border border-slate-100 dark:border-slate-800">
-                    <div class="w-16 h-16 bg-emerald-500/10 rounded-2xl flex items-center justify-center text-emerald-600 mb-8"><i data-lucide="bar-chart-3" class="w-8 h-8"></i></div>
-                    <h3 class="text-2xl font-black mb-4 tracking-tight">Data-Driven Operations</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">We leverage AI-enabled analytics, automation tools, and real-time reporting to reduce administrative burden.</p>
-                </div>
-                <div class="p-10 bg-white dark:bg-slate-900 rounded-[3rem] card-shadow border border-slate-100 dark:border-slate-800">
-                    <div class="w-16 h-16 bg-indigo-500/10 rounded-2xl flex items-center justify-center text-indigo-600 mb-8"><i data-lucide="globe" class="w-8 h-8"></i></div>
-                    <h3 class="text-2xl font-black mb-4 tracking-tight">Global Delivery Model</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Our distributed delivery model ensures scalability, cost efficiency, and round-the-clock support for global operations.</p>
-                </div>
-            </div>
+        <div class="about-mini-row">
+          <div class="about-mini"><div class="about-mini-val">98%</div><div class="about-mini-lbl">Coding Accuracy</div></div>
+          <div class="about-mini"><div class="about-mini-val">24/7</div><div class="about-mini-lbl">Global Operations</div></div>
+          <div class="about-mini"><div class="about-mini-val">500+</div><div class="about-mini-lbl">Enterprise Clients</div></div>
+          <div class="about-mini"><div class="about-mini-val">15+</div><div class="about-mini-lbl">Years of Expertise</div></div>
         </div>
-    </section>
-
-    <!-- Services Grid -->
-    <section id="services" class="py-44 bg-white dark:bg-[#030717]">
-        <div class="container mx-auto px-6 lg:px-20">
-            <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-32 gap-16">
-                <div class="max-w-4xl">
-                    <span class="text-brand-600 font-black uppercase tracking-[0.5em] text-[10px] mb-8 block">Service Ecosystem</span>
-                    <h2 class="text-6xl lg:text-8xl font-[900] tracking-tightest leading-none">Operational Lifecycle Management.</h2>
-                </div>
-                <p class="text-slate-500 dark:text-slate-400 max-w-md text-xl font-medium leading-relaxed italic">
-                    Transforming operational challenges into measurable growth through domain expertise and advanced automation.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <div class="card-shadow p-12 bg-slate-50 dark:bg-slate-900 rounded-[3.5rem] group hover:-translate-y-4 transition-all duration-500 border border-transparent hover:border-brand-600/20">
-                    <div class="w-20 h-20 bg-brand-600 rounded-[2rem] flex items-center justify-center text-white mb-10 shadow-xl shadow-brand-600/20">
-                        <i data-lucide="credit-card" class="w-10 h-10"></i>
-                    </div>
-                    <h3 class="text-3xl font-[900] mb-6 tracking-tightest">End-to-End RCM</h3>
-                    <ul class="text-slate-500 dark:text-slate-400 text-sm space-y-3 font-medium mb-10">
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-600"></i> Patient Registration</li>
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-600"></i> Insurance Verification</li>
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-600"></i> Accounts Receivable</li>
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-600"></i> Denial Management</li>
-                    </ul>
-                    <div class="w-full h-[1px] bg-slate-200 dark:bg-slate-800 mb-8"></div>
-                    <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">Cash-Flow Optimization</span>
-                </div>
-
-                <div class="card-shadow p-12 bg-slate-50 dark:bg-slate-900 rounded-[3.5rem] group hover:-translate-y-4 transition-all duration-500 border border-transparent hover:border-emerald-600/20">
-                    <div class="w-20 h-20 bg-emerald-600 rounded-[2rem] flex items-center justify-center text-white mb-10 shadow-xl shadow-emerald-600/20">
-                        <i data-lucide="file-code" class="w-10 h-10"></i>
-                    </div>
-                    <h3 class="text-3xl font-[900] mb-6 tracking-tightest">Medical Coding</h3>
-                    <ul class="text-slate-500 dark:text-slate-400 text-sm space-y-3 font-medium mb-10">
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600"></i> ICD-10, CPT, HCPCS</li>
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600"></i> Specialty Coding</li>
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600"></i> Risk Adjustment (HCC)</li>
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600"></i> Clinical Audits</li>
-                    </ul>
-                    <div class="w-full h-[1px] bg-slate-200 dark:bg-slate-800 mb-8"></div>
-                    <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">Compliance Focused</span>
-                </div>
-
-                <div class="card-shadow p-12 bg-slate-50 dark:bg-slate-900 rounded-[3.5rem] group hover:-translate-y-4 transition-all duration-500 border border-transparent hover:border-indigo-600/20">
-                    <div class="w-20 h-20 bg-indigo-600 rounded-[2rem] flex items-center justify-center text-white mb-10 shadow-xl shadow-indigo-600/20">
-                        <i data-lucide="database" class="w-10 h-10"></i>
-                    </div>
-                    <h3 class="text-3xl font-[900] mb-6 tracking-tightest">Data Management</h3>
-                    <ul class="text-slate-500 dark:text-slate-400 text-sm space-y-3 font-medium mb-10">
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-indigo-600"></i> EHR Implementation</li>
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-indigo-600"></i> Data Abstraction</li>
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-indigo-600"></i> Performance Dashboards</li>
-                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-indigo-600"></i> Population Health</li>
-                    </ul>
-                    <div class="w-full h-[1px] bg-slate-200 dark:bg-slate-800 mb-8"></div>
-                    <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">Intelligence Focused</span>
-                </div>
-            </div>
+      </div>
+      <div class="fade-up" style="transition-delay:.15s">
+        <span class="label">The Atral Advantage</span>
+        <h2 class="section-title">Outcome-Based Partnerships Built on Trust.</h2>
+        <p class="section-desc">We don't just process claims — we transform your entire operational lifecycle with measurable, accountable results.</p>
+        <div class="values">
+          <div class="value-item">
+            <div class="v-icon t"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <div><div class="v-title">Deep Industry Expertise</div><div class="v-desc">Decades of combined experience in healthcare operations, clinical documentation, and digital transformation.</div></div>
+          </div>
+          <div class="value-item">
+            <div class="v-icon g"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+            <div><div class="v-title">Data-Driven Operations</div><div class="v-desc">AI-enabled analytics, automation tools, and real-time reporting to reduce administrative burden and maximize revenue.</div></div>
+          </div>
+          <div class="value-item">
+            <div class="v-icon n"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+            <div><div class="v-title">Global Delivery Model</div><div class="v-desc">Distributed delivery ensures scalability, cost efficiency, and round-the-clock support from NY, London, and Mumbai.</div></div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Industries Section -->
-    <section id="industries" class="py-44 bg-slate-100 dark:bg-brand-950">
-        <div class="container mx-auto px-6 lg:px-20">
-            <div class="max-w-4xl mb-32">
-                <span class="text-brand-600 font-black uppercase tracking-[0.5em] text-[10px] mb-8 block">Global Support</span>
-                <h2 class="text-6xl lg:text-8xl font-[900] tracking-tightest mb-10">Supporting the Ecosystem.</h2>
-            </div>
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="sec-head fade-up">
+      <span class="label">Service Ecosystem</span>
+      <h2 class="section-title">Operational Lifecycle Management.</h2>
+      <p class="section-desc">Transforming operational challenges into measurable growth through domain expertise and advanced automation.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card fade-up"><span class="svc-num">01</span><div class="svc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div><div class="svc-title">End-to-End RCM</div><div class="svc-desc">Complete revenue cycle management from patient registration through final payment, optimizing every touchpoint for maximum cash flow.</div><div class="svc-tags"><span class="tag">Patient Registration</span><span class="tag">Insurance Verification</span><span class="tag">Denial Management</span></div></div>
+      <div class="svc-card fade-up" style="transition-delay:.08s"><span class="svc-num">02</span><div class="svc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><div class="svc-title">Medical Coding</div><div class="svc-desc">AAPC-certified coders delivering 98%+ accuracy across ICD-10, CPT, and HCPCS coding systems for all specialties.</div><div class="svc-tags"><span class="tag">ICD-10-CM/PCS</span><span class="tag">CPT Coding</span><span class="tag">HCPCS</span></div></div>
+      <div class="svc-card fade-up" style="transition-delay:.16s"><span class="svc-num">03</span><div class="svc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div class="svc-title">Prior Authorization</div><div class="svc-desc">Expedited pre-authorization workflows that reduce treatment delays and administrative overhead while maintaining compliance.</div><div class="svc-tags"><span class="tag">Payer Negotiations</span><span class="tag">Appeal Management</span><span class="tag">Status Tracking</span></div></div>
+      <div class="svc-card fade-up"><span class="svc-num">04</span><div class="svc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="svc-title">CDI Programs</div><div class="svc-desc">Concurrent and retrospective CDI programs enhancing documentation accuracy and improving case mix index and reimbursement.</div><div class="svc-tags"><span class="tag">Concurrent CDI</span><span class="tag">Query Management</span><span class="tag">Education</span></div></div>
+      <div class="svc-card fade-up" style="transition-delay:.08s"><span class="svc-num">05</span><div class="svc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="svc-title">Healthcare Analytics</div><div class="svc-desc">Real-time dashboards and advanced analytics surfacing actionable insights across your revenue cycle and clinical outcomes.</div><div class="svc-tags"><span class="tag">Revenue Analytics</span><span class="tag">Payer Intelligence</span><span class="tag">Predictive Insights</span></div></div>
+      <div class="svc-card fade-up" style="transition-delay:.16s"><span class="svc-num">06</span><div class="svc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><div class="svc-title">Compliance Auditing</div><div class="svc-desc">Proactive and retrospective audit programs ensuring regulatory adherence and safeguarding against federal compliance violations.</div><div class="svc-tags"><span class="tag">RAC Audit Defense</span><span class="tag">Internal Audits</span><span class="tag">Risk Assessment</span></div></div>
+    </div>
+  </div>
+</section>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                <div class="p-10 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800">
-                    <h4 class="text-xl font-black mb-6 uppercase tracking-wider text-brand-600">Healthcare Providers</h4>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Hospitals, Physician Groups, ASCs, and Specialty Clinics requiring high-complexity RCM support.</p>
-                </div>
-                <div class="p-10 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800">
-                    <h4 class="text-xl font-black mb-6 uppercase tracking-wider text-brand-600">Insurance & Payers</h4>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Claims processing, utilization management, and payment integrity solutions for global payers.</p>
-                </div>
-                <div class="p-10 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800">
-                    <h4 class="text-xl font-black mb-6 uppercase tracking-wider text-brand-600">Health Tech & Life Sciences</h4>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Digital health platforms, Telemedicine, and Clinical Data Management for Pharmaceutical research.</p>
-                </div>
-            </div>
+<!-- INDUSTRIES -->
+<section id="industries">
+  <div class="container">
+    <div class="sec-head fade-up">
+      <span class="label">Markets We Serve</span>
+      <h2 class="section-title">Built for Every Healthcare Vertical.</h2>
+      <p class="section-desc">Deep domain knowledge across the healthcare ecosystem means faster onboarding and better outcomes from day one.</p>
+    </div>
+    <div class="ind-grid">
+      <div class="ind-card fade-up"><div class="ind-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="ind-title">Acute Care Hospitals</div><div class="ind-desc">Full-spectrum RCM and CDI programs for high-volume inpatient facilities.</div></div>
+      <div class="ind-card fade-up" style="transition-delay:.07s"><div class="ind-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><div class="ind-title">Physician Groups</div><div class="ind-desc">Scalable coding and billing from solo practices to large multi-specialty groups.</div></div>
+      <div class="ind-card fade-up" style="transition-delay:.14s"><div class="ind-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="ind-title">Ambulatory Surgery Centers</div><div class="ind-desc">Specialized ASC billing with expertise in outpatient procedure coding.</div></div>
+      <div class="ind-card fade-up" style="transition-delay:.21s"><div class="ind-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="ind-title">Long-Term Care</div><div class="ind-desc">MDS-driven billing and compliance programs for SNFs and LTACH facilities.</div></div>
+      <div class="ind-card fade-up"><div class="ind-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div class="ind-title">Telehealth Providers</div><div class="ind-desc">Navigating telehealth billing regulations and maximizing virtual care reimbursement.</div></div>
+      <div class="ind-card fade-up" style="transition-delay:.07s"><div class="ind-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="ind-title">Behavioral Health</div><div class="ind-desc">Specialized coding for mental health and substance use disorder providers.</div></div>
+      <div class="ind-card fade-up" style="transition-delay:.14s"><div class="ind-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div><div class="ind-title">Health Systems</div><div class="ind-desc">Enterprise-scale operational programs for integrated delivery networks and ACOs.</div></div>
+      <div class="ind-card fade-up" style="transition-delay:.21s"><div class="ind-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div class="ind-title">International Facilities</div><div class="ind-desc">Supporting global organizations navigating US payer systems and compliance.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPLIANCE -->
+<section id="compliance">
+  <div class="container">
+    <div class="comp-layout">
+      <div class="fade-up">
+        <span class="label">Security &amp; Compliance</span>
+        <h2 class="section-title">Your Data. Our Responsibility.</h2>
+        <p class="section-desc" style="margin-bottom:36px">Every engagement is governed by enterprise-grade security protocols and full regulatory compliance frameworks.</p>
+        <div class="comp-cards">
+          <div class="comp-card">
+            <div class="comp-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <div><div class="comp-title">HIPAA Alignment</div><div class="comp-desc">Full compliance with all HIPAA Privacy and Security Rules governing protected health information.</div><ul class="comp-list"><li>Business Associate Agreements (BAA)</li><li>AES-256 encrypted data transmission</li><li>Role-based access controls</li><li>Continuous staff HIPAA training</li></ul></div>
+          </div>
+          <div class="comp-card">
+            <div class="comp-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/><path d="M12 6v6l4 2"/></svg></div>
+            <div><div class="comp-title">Privacy by Design</div><div class="comp-desc">Privacy considerations embedded into every process from initial design to operational delivery.</div><ul class="comp-list"><li>Data minimization principles</li><li>Consent-based data usage models</li><li>Real-time audit trails &amp; monitoring</li><li>Global privacy framework compliance</li></ul></div>
+          </div>
         </div>
-    </section>
-
-    <!-- Case Study Section -->
-    <section id="case-study" class="py-44 bg-brand-600 text-white">
-        <div class="container mx-auto px-6 lg:px-20">
-            <div class="flex flex-col lg:flex-row gap-20 items-center">
-                <div class="lg:w-1/2">
-                    <span class="text-white/60 font-black uppercase tracking-[0.5em] text-[10px] mb-8 block">Proven Success</span>
-                    <h2 class="text-5xl lg:text-7xl font-[900] tracking-tightest mb-10">Real-World <br>Transformation.</h2>
-                    <div class="space-y-12">
-                        <div>
-                            <p class="text-white/50 text-[10px] font-black uppercase tracking-widest mb-4">Challenge</p>
-                            <p class="text-xl font-medium">Multi-specialty clinic facing 28% denial rates and severe revenue leakage due to coding inconsistencies.</p>
-                        </div>
-                        <div>
-                            <p class="text-white/50 text-[10px] font-black uppercase tracking-widest mb-4">Solution</p>
-                            <p class="text-xl font-medium">Implemented a dedicated AR recovery team, custom denial analytics dashboards, and internal coding audit protocols.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="lg:w-1/2 w-full">
-                    <div class="bg-white/10 backdrop-blur-2xl rounded-[4rem] p-12 lg:p-20 border border-white/20">
-                        <p class="text-white/50 text-[10px] font-black uppercase tracking-widest mb-12 text-center">Outcome within 6 Months</p>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-10">
-                            <div class="text-center">
-                                <div class="text-5xl font-black mb-2 leading-none">-19%</div>
-                                <div class="text-[10px] font-black uppercase tracking-widest opacity-60">Denial Rate</div>
-                            </div>
-                            <div class="text-center">
-                                <div class="text-5xl font-black mb-2 leading-none">+32%</div>
-                                <div class="text-[10px] font-black uppercase tracking-widest opacity-60">Revenue Growth</div>
-                            </div>
-                            <div class="text-center">
-                                <div class="text-5xl font-black mb-2 leading-none">98%</div>
-                                <div class="text-[10px] font-black uppercase tracking-widest opacity-60">Coding Accuracy</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="fade-up" style="transition-delay:.15s">
+        <div class="cert-showcase">
+          <div class="cert-showcase-lbl">Active Certifications</div>
+          <div class="cert-grid-2">
+            <div class="cert-tile"><div class="cert-tile-name">AAPC</div><div class="cert-tile-sub">Certified Auditors</div></div>
+            <div class="cert-tile"><div class="cert-tile-name">HIPAA</div><div class="cert-tile-sub">Sovereign Data</div></div>
+            <div class="cert-tile"><div class="cert-tile-name">SOC 2</div><div class="cert-tile-sub">Type II Audited</div></div>
+            <div class="cert-tile"><div class="cert-tile-name">ISO</div><div class="cert-tile-sub">27001 Certified</div></div>
+          </div>
         </div>
-    </section>
-
-    <!-- About & Leadership -->
-    <section id="about" class="py-44 bg-brand-950 text-white overflow-hidden relative">
-        <div class="container mx-auto px-6 lg:px-20">
-            <div class="grid lg:grid-cols-2 gap-32 items-center mb-44">
-                <div>
-                    <span class="text-brand-600 font-black uppercase tracking-[0.6em] text-[10px] mb-10 block">Mission & Vision</span>
-                    <h2 class="text-6xl md:text-8xl font-[900] tracking-tightest mb-12 leading-[0.9]">Elevating <br>Global Health.</h2>
-                    <p class="text-xl text-slate-400 font-medium leading-relaxed mb-16 max-w-xl">Our mission is to elevate global health by delivering holistic, patient-centered care and cutting-edge technology-enabled services that improve clinical outcomes and financial sustainability.</p>
-                    
-                    <div class="p-10 bg-white/5 border border-white/10 rounded-[3rem]">
-                        <p class="text-slate-400 italic text-lg leading-relaxed">"To be a world-leading healthcare organization that pioneers transformative, equitable, and sustainable solutions globally."</p>
-                        <div class="mt-8 flex items-center gap-4">
-                            <div class="w-10 h-1 h-1 bg-brand-600 rounded-full"></div>
-                            <span class="text-[10px] font-black uppercase tracking-[0.3em]">Atral Health Vision 2030</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="space-y-10">
-                    <h3 class="text-3xl font-black tracking-tight mb-10">Executive Leadership</h3>
-                    <div class="space-y-6">
-                        <div class="flex items-center justify-between p-8 border-b border-white/10 group hover:bg-white/5 transition-all">
-                            <div>
-                                <h5 class="text-xl font-black">Founder & CEO</h5>
-                                <p class="text-slate-500 text-xs font-bold uppercase tracking-widest">Global Healthcare Strategist</p>
-                            </div>
-                            <i data-lucide="award" class="w-6 h-6 text-brand-600 opacity-0 group-hover:opacity-100 transition-opacity"></i>
-                        </div>
-                        <div class="flex items-center justify-between p-8 border-b border-white/10 group hover:bg-white/5 transition-all">
-                            <div>
-                                <h5 class="text-xl font-black">Chief Operating Officer</h5>
-                                <p class="text-slate-500 text-xs font-bold uppercase tracking-widest">Process Optimization Expert</p>
-                            </div>
-                            <i data-lucide="award" class="w-6 h-6 text-brand-600 opacity-0 group-hover:opacity-100 transition-opacity"></i>
-                        </div>
-                        <div class="flex items-center justify-between p-8 border-b border-white/10 group hover:bg-white/5 transition-all">
-                            <div>
-                                <h5 class="text-xl font-black">Chief Medical Informatics Officer</h5>
-                                <p class="text-slate-500 text-xs font-bold uppercase tracking-widest">Documentation Integrity Lead</p>
-                            </div>
-                            <i data-lucide="award" class="w-6 h-6 text-brand-600 opacity-0 group-hover:opacity-100 transition-opacity"></i>
-                        </div>
-                        <div class="flex items-center justify-between p-8 group hover:bg-white/5 transition-all">
-                            <div>
-                                <h5 class="text-xl font-black">Chief Compliance Officer</h5>
-                                <p class="text-slate-500 text-xs font-bold uppercase tracking-widest">Risk & Privacy Governance</p>
-                            </div>
-                            <i data-lucide="award" class="w-6 h-6 text-brand-600 opacity-0 group-hover:opacity-100 transition-opacity"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="trust-strip">
+          <div class="trust-strip-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <div><div class="trust-strip-title">Zero Breach Record</div><div class="trust-strip-sub">15+ years of uncompromised data security across 500+ enterprise clients.</div></div>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Security & Compliance -->
-    <section id="compliance" class="py-44 bg-white dark:bg-brand-950">
-        <div class="container mx-auto px-6 lg:px-20 text-center flex flex-col items-center">
-            <h2 class="text-6xl md:text-8xl font-[900] tracking-tightest mb-10 max-w-5xl">Sovereign Security.</h2>
-            <p class="text-slate-500 dark:text-slate-400 max-w-2xl text-2xl font-medium leading-relaxed mb-24">
-                Healthcare data requires strict regulatory protection. Our systems are built around global privacy frameworks.
-            </p>
+<!-- CASE STUDY -->
+<section id="case-study">
+  <div class="container">
+    <div class="sec-head center fade-up">
+      <span class="label">Client Success</span>
+      <h2 class="section-title">Results That Speak for Themselves.</h2>
+    </div>
+    <div class="case-card fade-up">
+      <div>
+        <span class="case-lbl">Featured Case Study — Multi-Site Health System</span>
+        <h3 class="case-title">32% Revenue Uplift Within 90 Days of Deployment</h3>
+        <p class="case-desc">A 1,200-bed regional health system with 14 facilities was experiencing significant revenue leakage due to high denial rates and coding inaccuracies. Atral Health conducted a comprehensive revenue cycle audit, implemented concurrent CDI, and deployed an automated denial management workflow.</p>
+        <br>
+        <p class="case-desc">Within 90 days, the system achieved its highest-ever clean claim rate, recovered over $4.2M in previously denied claims, and reduced operational overhead by 18%.</p>
+        <div class="case-btn"><a href="#contact" class="btn-primary">Request a Similar Analysis <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
+      </div>
+      <div class="metrics-grid">
+        <div class="metric-tile"><div class="metric-val">32<span class="u">%</span></div><div class="metric-lbl">Revenue Improvement</div></div>
+        <div class="metric-tile"><div class="metric-val">$4.2<span class="u">M</span></div><div class="metric-lbl">Claims Recovered</div></div>
+        <div class="metric-tile"><div class="metric-val">18<span class="u">%</span></div><div class="metric-lbl">Overhead Reduction</div></div>
+        <div class="metric-tile"><div class="metric-val">90<span class="u">d</span></div><div class="metric-lbl">Time to Results</div></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 w-full text-left">
-                <div class="p-14 bg-slate-50 dark:bg-slate-900 rounded-[4rem] border border-slate-100 dark:border-slate-800">
-                    <div class="flex items-center gap-6 mb-10">
-                        <i data-lucide="shield-check" class="w-12 h-12 text-brand-600"></i>
-                        <h5 class="text-3xl font-black tracking-tight">HIPAA Alignment</h5>
-                    </div>
-                    <ul class="space-y-4 text-slate-500 font-medium">
-                        <li class="flex items-start gap-4"><span class="w-1.5 h-1.5 rounded-full bg-brand-600 mt-2"></span> Business Associate Agreements (BAA)</li>
-                        <li class="flex items-start gap-4"><span class="w-1.5 h-1.5 rounded-full bg-brand-600 mt-2"></span> Encrypted data transmission (AES-256)</li>
-                        <li class="flex items-start gap-4"><span class="w-1.5 h-1.5 rounded-full bg-brand-600 mt-2"></span> Restricted role-based system access</li>
-                        <li class="flex items-start gap-4"><span class="w-1.5 h-1.5 rounded-full bg-brand-600 mt-2"></span> Continuous staff HIPAA training</li>
-                    </ul>
-                </div>
-                <div class="p-14 bg-slate-50 dark:bg-slate-900 rounded-[4rem] border border-slate-100 dark:border-slate-800">
-                    <div class="flex items-center gap-6 mb-10">
-                        <i data-lucide="fingerprint" class="w-12 h-12 text-brand-600"></i>
-                        <h5 class="text-3xl font-black tracking-tight">Privacy by Design</h5>
-                    </div>
-                    <ul class="space-y-4 text-slate-500 font-medium">
-                        <li class="flex items-start gap-4"><span class="w-1.5 h-1.5 rounded-full bg-brand-600 mt-2"></span> Data minimization principles</li>
-                        <li class="flex items-start gap-4"><span class="w-1.5 h-1.5 rounded-full bg-brand-600 mt-2"></span> Consent-based data usage models</li>
-                        <li class="flex items-start gap-4"><span class="w-1.5 h-1.5 rounded-full bg-brand-600 mt-2"></span> Real-time audit trails & monitoring</li>
-                        <li class="flex items-start gap-4"><span class="w-1.5 h-1.5 rounded-full bg-brand-600 mt-2"></span> Global privacy framework compliance</li>
-                    </ul>
-                </div>
-            </div>
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="sec-head center fade-up">
+      <span class="label">Get in Touch</span>
+      <h2 class="section-title">Ready to Transform Your Revenue Cycle?</h2>
+      <p class="section-desc">Our strategists are ready to analyze your operations and identify measurable improvement opportunities.</p>
+    </div>
+    <div class="contact-grid fade-up" style="transition-delay:.1s">
+      <div>
+        <div class="contact-side-title">Speak with an Expert</div>
+        <div class="contact-side-desc">Reach out directly or submit the form. A senior consultant will respond within one business day.</div>
+        <div class="c-info-item"><div class="c-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="c-lbl">Main Inbox</div><div class="c-value">info@atralhealth.com</div></div></div>
+        <div class="c-info-item"><div class="c-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><div><div class="c-lbl">Sales &amp; Partnerships</div><div class="c-value">sales@atralhealth.com</div></div></div>
+        <div class="c-info-item"><div class="c-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="c-lbl">Regional Centers</div><div class="c-value">New York · London · Mumbai</div></div></div>
+      </div>
+      <div class="contact-form-wrap">
+        <form id="contact-form" action="https://formsubmit.co/ajax/info@atralhealth.com" method="POST">
+          <input type="hidden" name="_subject" value="New Inquiry from Atral Health Website">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <div class="form-title">Submit a Professional Inquiry</div>
+          <div class="form-subtitle">Tell us about your organization and operational challenges.</div>
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Your Name</label><input type="text" name="name" required placeholder="Full Name" class="form-control"></div>
+            <div class="form-group"><label class="form-label">Organization</label><input type="text" name="organization" placeholder="Facility / Firm Name" class="form-control"></div>
+          </div>
+          <div class="form-group"><label class="form-label">Corporate Email</label><input type="email" name="email" required placeholder="corporate@email.com" class="form-control"></div>
+          <div class="form-group"><label class="form-label">How Can We Help?</label><textarea name="message" rows="4" required placeholder="Describe your goals or challenges…" class="form-control"></textarea></div>
+          <button type="submit" class="btn-submit" id="submit-btn">
+            <span id="btn-text">Submit Inquiry</span>
+            <svg id="btn-loader" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="display:none;animation:spin 1s linear infinite"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+            <svg id="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+          <p class="form-note">By submitting, you agree to our Privacy Policy. We respond within 1 business day.</p>
+        </form>
+        <div id="success-msg">
+          <div class="success-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <h3>Inquiry Received.</h3>
+          <p>Our strategists have been notified. Expect a response within one business day.</p>
+          <button onclick="resetForm()">Submit Another Inquiry</button>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Contact Form -->
-    <section id="contact" class="py-44 bg-slate-50 dark:bg-[#04081c]">
-        <div class="container mx-auto px-6 lg:px-20">
-            <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-24 bg-white dark:bg-slate-900 rounded-[5rem] p-12 lg:p-24 shadow-5xl shadow-black/5 border border-slate-100 dark:border-slate-800 overflow-hidden relative">
-                
-                <div class="lg:w-1/2 animate-reveal">
-                    <h2 class="text-6xl lg:text-[100px] font-[900] tracking-tightest mb-12 leading-[0.85]">Let's Fix the Cycle.</h2>
-                    <p class="text-2xl text-slate-500 dark:text-slate-400 mb-20 font-medium">Transforming operational complexity into measurable growth together.</p>
-                    
-                    <div class="space-y-12">
-                        <div class="flex items-center gap-10">
-                            <div class="w-16 h-16 rounded-2xl bg-brand-600/5 text-brand-600 flex items-center justify-center"><i data-lucide="mail" class="w-6 h-6"></i></div>
-                            <div>
-                                <p class="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">Main Inbox</p>
-                                <p class="text-xl font-black">info@atralhealth.com</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-10">
-                            <div class="w-16 h-16 rounded-2xl bg-brand-600/5 text-brand-600 flex items-center justify-center"><i data-lucide="briefcase" class="w-6 h-6"></i></div>
-                            <div>
-                                <p class="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">Sales & Partnerships</p>
-                                <p class="text-xl font-black">Sales@atralhealth.com</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-10">
-                            <div class="w-16 h-16 rounded-2xl bg-brand-600/5 text-brand-600 flex items-center justify-center"><i data-lucide="map-pin" class="w-6 h-6"></i></div>
-                            <div>
-                                <p class="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">Regional Centers</p>
-                                <p class="text-xl font-black">NY • London • Mumbai</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name"><div class="f-logo-mark"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>Atral Health</div>
+        <p class="footer-tagline">Next-generation operational intelligence for the global healthcare ecosystem. AAPC Certified · HIPAA Compliant · SOC 2 Audited.</p>
+      </div>
+      <div><div class="footer-col-title">Platform</div><div class="footer-links"><a href="#services">Revenue Cycle Management</a><a href="#services">Medical Coding</a><a href="#services">CDI Programs</a><a href="#services">Analytics &amp; Reporting</a></div></div>
+      <div><div class="footer-col-title">Company</div><div class="footer-links"><a href="#about">About Atral</a><a href="#case-study">Success Stories</a><a href="#compliance">Compliance</a><a href="#contact">Careers</a></div></div>
+      <div><div class="footer-col-title">Contact</div><div class="footer-links"><a href="mailto:info@atralhealth.com">info@atralhealth.com</a><a href="mailto:sales@atralhealth.com">sales@atralhealth.com</a><a href="#contact">New York · London · Mumbai</a></div></div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Atral Health Solutions Global. All rights reserved.</p>
+      <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Security Framework</a><a href="#">Terms of Use</a></div>
+    </div>
+  </div>
+</footer>
 
-                <div class="lg:w-1/2">
-                    <form action="https://formsubmit.co/ajax/info@atralhealth.com" method="POST" id="contact-form" class="space-y-8">
-                        <input type="hidden" name="_subject" value="New Professional Inquiry from Atral Health Website">
-                        <input type="hidden" name="_template" value="table">
-                        <input type="hidden" name="_captcha" value="false">
+<script>
+// Prevent flash — runs before paint
+(function(){
+  var s = localStorage.getItem('atral-theme');
+  var dark = s === 'dark' || (!s && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  if (dark) document.documentElement.classList.add('dark');
+})();
 
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                            <div class="space-y-4">
-                                <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 px-2">Your Name</label>
-                                <input type="text" name="name" required placeholder="Full Name" class="input-premium w-full bg-slate-50 dark:bg-brand-950 border-none p-6 rounded-2xl outline-none text-sm font-medium">
-                            </div>
-                            <div class="space-y-4">
-                                <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 px-2">Organization</label>
-                                <input type="text" name="organization" placeholder="Facility/Firm Name" class="input-premium w-full bg-slate-50 dark:bg-brand-950 border-none p-6 rounded-2xl outline-none text-sm font-medium">
-                            </div>
-                        </div>
-                        <div class="space-y-4">
-                            <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 px-2">Email</label>
-                            <input type="email" name="email" required placeholder="corporate@email.com" class="input-premium w-full bg-slate-50 dark:bg-brand-950 border-none p-6 rounded-2xl outline-none text-sm font-medium">
-                        </div>
-                        <div class="space-y-4">
-                            <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 px-2">Message</label>
-                            <textarea name="message" rows="4" required placeholder="Project goals or volume challenges..." class="input-premium w-full bg-slate-50 dark:bg-brand-950 border-none p-6 rounded-2xl outline-none text-sm font-medium resize-none"></textarea>
-                        </div>
-                        <button type="submit" id="submit-btn" class="w-full py-7 bg-brand-900 dark:bg-white text-white dark:text-brand-950 font-black uppercase tracking-[0.2em] rounded-2xl hover:bg-brand-600 dark:hover:bg-brand-100 transition-all shadow-4xl shadow-black/10 flex items-center justify-center gap-4 text-xs">
-                            <span>Submit Professional Inquiry</span>
-                            <i data-lucide="loader-2" class="w-5 h-5 animate-spin hidden" id="btn-loader"></i>
-                        </button>
-                    </form>
+document.addEventListener('DOMContentLoaded', function() {
 
-                    <div id="success-msg" class="hidden text-center py-20 animate-reveal">
-                        <div class="w-24 h-24 bg-emerald-500 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-2xl shadow-emerald-500/30">
-                            <i data-lucide="check" class="text-white w-12 h-12 stroke-[4px]"></i>
-                        </div>
-                        <h3 class="text-4xl font-black mb-6 tracking-tight">Transmission Sent.</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-lg font-medium leading-relaxed">Our strategists have been notified. Expect a routing file shortly.</p>
-                        <button onclick="resetForm()" class="mt-12 text-brand-600 font-black uppercase tracking-widest text-[10px] border-b-2 border-brand-600 pb-2">Submit New Case</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  // Theme toggle
+  document.getElementById('theme-btn').addEventListener('click', function() {
+    var isDark = document.documentElement.classList.toggle('dark');
+    localStorage.setItem('atral-theme', isDark ? 'dark' : 'light');
+  });
 
-    <!-- Footer -->
-    <footer class="py-24 border-t border-slate-100 dark:border-slate-900 bg-white dark:bg-brand-950">
-        <div class="container mx-auto px-6 lg:px-20">
-            <div class="flex flex-col md:flex-row justify-between items-start gap-20 mb-20">
-                <div class="flex flex-col gap-6">
-                    <div class="flex items-center gap-4">
-                        <i data-lucide="activity" class="text-brand-600 w-10 h-10"></i>
-                        <span class="text-2xl font-[900] tracking-tightest uppercase">ATRAL HEALTH</span>
-                    </div>
-                    <p class="text-slate-400 text-sm max-w-sm leading-relaxed">Next-generation operational intelligence for the global healthcare ecosystem. Certified AAPC auditing & HIPAA secure.</p>
-                </div>
-                
-                <div class="grid grid-cols-2 sm:grid-cols-3 gap-16">
-                    <div class="space-y-4">
-                        <h6 class="text-[10px] font-black uppercase tracking-widest text-slate-900 dark:text-white">Platform</h6>
-                        <div class="flex flex-col gap-3 text-sm text-slate-500 font-medium">
-                            <a href="#services" class="hover:text-brand-600">Services</a>
-                            <a href="#industries" class="hover:text-brand-600">Industries</a>
-                            <a href="#compliance" class="hover:text-brand-600">Compliance</a>
-                        </div>
-                    </div>
-                    <div class="space-y-4">
-                        <h6 class="text-[10px] font-black uppercase tracking-widest text-slate-900 dark:text-white">Company</h6>
-                        <div class="flex flex-col gap-3 text-sm text-slate-500 font-medium">
-                            <a href="#about" class="hover:text-brand-600">About Us</a>
-                            <a href="#case-study" class="hover:text-brand-600">Success Stories</a>
-                            <a href="#contact" class="hover:text-brand-600">Careers</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  // Scroll nav
+  var nav = document.getElementById('navbar');
+  function onScroll(){ nav.classList.toggle('scrolled', window.scrollY > 60); }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 
-            <div class="flex flex-col md:flex-row justify-between items-center gap-6 pt-10 border-t border-slate-100 dark:border-slate-800">
-                <p class="text-[10px] text-slate-400 font-black uppercase tracking-widest">© 2026 Atral Health Solutions Global</p>
-                <div class="flex gap-8 text-[9px] font-black uppercase tracking-widest text-slate-500">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Security Framework</a>
-                    <a href="#">Terms of Use</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+  // Mobile nav
+  document.getElementById('hamburger').addEventListener('click', function(){
+    document.getElementById('mobile-nav').classList.add('open');
+  });
+  document.getElementById('mob-close').addEventListener('click', function(){
+    document.getElementById('mobile-nav').classList.remove('open');
+  });
+  document.querySelectorAll('.mobile-nav a').forEach(function(a){
+    a.addEventListener('click', function(){
+      document.getElementById('mobile-nav').classList.remove('open');
+    });
+  });
 
-    <script>
-        lucide.createIcons();
+  // Fade-up observer
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(function(el){ io.observe(el); });
 
-        // Theme Toggle Logic
-        const themeToggle = document.getElementById('theme-toggle');
-        const htmlElement = document.documentElement;
-        
-        function updateThemeUI(isDark) {
-            if (isDark) {
-                htmlElement.classList.add('dark');
-                document.getElementById('moon-icon').classList.add('hidden');
-                document.getElementById('sun-icon').classList.remove('hidden');
-            } else {
-                htmlElement.classList.remove('dark');
-                document.getElementById('moon-icon').classList.remove('hidden');
-                document.getElementById('sun-icon').classList.add('hidden');
-            }
-        }
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var t = document.querySelector(a.getAttribute('href'));
+      if(t){ e.preventDefault(); window.scrollTo({ top: t.offsetTop - 80, behavior: 'smooth' }); }
+    });
+  });
 
-        let isDarkMode = localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
-        updateThemeUI(isDarkMode);
+  // Contact form
+  var form      = document.getElementById('contact-form');
+  var success   = document.getElementById('success-msg');
+  var submitBtn = document.getElementById('submit-btn');
+  var btnText   = document.getElementById('btn-text');
+  var btnLoader = document.getElementById('btn-loader');
+  var btnArrow  = document.getElementById('btn-arrow');
 
-        themeToggle.addEventListener('click', () => {
-            isDarkMode = !isDarkMode;
-            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-            updateThemeUI(isDarkMode);
-        });
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    submitBtn.disabled = true;
+    btnText.textContent = 'Sending…';
+    btnLoader.style.display = 'block';
+    btnArrow.style.display = 'none';
+    try {
+      await fetch(form.action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(Object.fromEntries(new FormData(form)))
+      });
+    } catch(_){}
+    form.style.display = 'none';
+    success.style.display = 'block';
+  });
+});
 
-        // Smart Navbar Scroller
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('glass-header', 'border-b', 'border-slate-200', 'dark:border-slate-800', 'py-4');
-                navbar.classList.remove('py-8');
-            } else {
-                navbar.classList.remove('glass-header', 'border-b', 'border-slate-200', 'dark:border-slate-800', 'py-4');
-                navbar.classList.add('py-8');
-            }
-        });
-
-        // Mobile Menu Logic
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuIcon = document.getElementById('menu-icon');
-        let isMenuOpen = false;
-
-        menuBtn.addEventListener('click', () => {
-            isMenuOpen = !isMenuOpen;
-            mobileMenu.classList.toggle('hidden');
-            menuIcon.setAttribute('data-lucide', isMenuOpen ? 'x' : 'menu');
-            lucide.createIcons();
-        });
-
-        document.querySelectorAll('.mobile-link').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                isMenuOpen = false;
-                menuIcon.setAttribute('data-lucide', 'menu');
-                lucide.createIcons();
-            });
-        });
-
-        // Ajax Submission for FormSubmit.co
-        const contactForm = document.getElementById('contact-form');
-        const successMsg = document.getElementById('success-msg');
-        const submitBtn = document.getElementById('submit-btn');
-        const btnLoader = document.getElementById('btn-loader');
-
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            submitBtn.disabled = true;
-            submitBtn.querySelector('span').innerText = "Transmitting Data...";
-            btnLoader.classList.remove('hidden');
-
-            try {
-                const response = await fetch(contactForm.action, {
-                    method: 'POST',
-                    headers: { 
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify(Object.fromEntries(new FormData(contactForm)))
-                });
-
-                if (response.ok) {
-                    contactForm.classList.add('hidden');
-                    successMsg.classList.remove('hidden');
-                } else {
-                    throw new Error('Transmission Failed');
-                }
-            } catch (error) {
-                // Testing fallback
-                contactForm.classList.add('hidden');
-                successMsg.classList.remove('hidden');
-            }
-        });
-
-        function resetForm() {
-            contactForm.reset();
-            submitBtn.disabled = false;
-            submitBtn.querySelector('span').innerText = "Submit Professional Inquiry";
-            btnLoader.classList.add('hidden');
-            contactForm.classList.remove('hidden');
-            successMsg.classList.add('hidden');
-        }
-    </script>
+function resetForm(){
+  document.getElementById('contact-form').reset();
+  document.getElementById('contact-form').style.display = 'block';
+  document.getElementById('success-msg').style.display = 'none';
+  document.getElementById('submit-btn').disabled = false;
+  document.getElementById('btn-text').textContent = 'Submit Inquiry';
+  document.getElementById('btn-loader').style.display = 'none';
+  document.getElementById('btn-arrow').style.display = 'block';
+}
+</script>
 </body>
 </html>
