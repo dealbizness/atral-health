@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atral Health | Enterprise Revenue Cycle Management</title>
+    <title>Atral Health | Enterprise Healthcare Operations & RCM</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
@@ -75,6 +75,11 @@
         }
 
         .text-balance { text-wrap: balance; }
+        
+        /* Hide scrollbar for cleaner look */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
     </style>
 </head>
 <body class="bg-white dark:bg-brand-950 text-slate-900 dark:text-slate-100 transition-colors duration-700 selection:bg-brand-600 selection:text-white">
@@ -82,7 +87,7 @@
     <!-- Navigation -->
     <nav id="navbar" class="fixed w-full z-50 transition-all duration-500 py-8">
         <div class="container mx-auto px-6 lg:px-20 flex justify-between items-center">
-            <div class="flex items-center gap-4 group cursor-pointer">
+            <div class="flex items-center gap-4 group cursor-pointer" onclick="window.scrollTo(0,0)">
                 <div class="w-12 h-12 bg-brand-600 rounded-2xl flex items-center justify-center shadow-2xl shadow-brand-600/30 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
                     <i data-lucide="activity" class="text-white w-7 h-7 stroke-[2.5px]"></i>
                 </div>
@@ -92,184 +97,296 @@
                 </div>
             </div>
 
-            <div class="hidden lg:flex items-center gap-14 text-[11px] font-extrabold uppercase tracking-[0.2em]">
-                <a href="#home" class="hover:text-brand-600 transition-colors">Home</a>
+            <div class="hidden xl:flex items-center gap-10 text-[10px] font-extrabold uppercase tracking-[0.2em]">
+                <a href="#about" class="hover:text-brand-600 transition-colors">Why Atral</a>
                 <a href="#services" class="hover:text-brand-600 transition-colors">Services</a>
-                <a href="#about" class="hover:text-brand-600 transition-colors">About</a>
-                <a href="#compliance" class="hover:text-brand-600 transition-colors">Security</a>
+                <a href="#industries" class="hover:text-brand-600 transition-colors">Industries</a>
+                <a href="#compliance" class="hover:text-brand-600 transition-colors">Compliance</a>
+                <a href="#case-study" class="hover:text-brand-600 transition-colors">Case Study</a>
                 
-                <div class="flex items-center gap-8 pl-8 border-l border-slate-200 dark:border-slate-800">
-                    <button id="theme-toggle" class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-900 hover:scale-105 transition-all">
-                        <i data-lucide="sun" id="sun-icon" class="hidden w-5 h-5"></i>
-                        <i data-lucide="moon" id="moon-icon" class="w-5 h-5"></i>
+                <div class="flex items-center gap-6 pl-6 border-l border-slate-200 dark:border-slate-800">
+                    <button id="theme-toggle" class="p-3 rounded-xl bg-slate-50 dark:bg-slate-900 hover:scale-105 transition-all">
+                        <i data-lucide="sun" id="sun-icon" class="hidden w-4 h-4 text-brand-500"></i>
+                        <i data-lucide="moon" id="moon-icon" class="w-4 h-4 text-brand-500"></i>
                     </button>
-                    <a href="#contact" class="bg-brand-900 dark:bg-white text-white dark:text-brand-950 px-10 py-4 rounded-2xl hover:bg-brand-600 dark:hover:bg-brand-50 shadow-xl transition-all active:scale-95">
+                    <a href="#contact" class="bg-brand-900 dark:bg-white text-white dark:text-brand-950 px-8 py-3 rounded-xl hover:bg-brand-600 dark:hover:bg-brand-50 shadow-xl transition-all active:scale-95 text-[9px]">
                         Consultation
                     </a>
                 </div>
             </div>
 
-            <button class="lg:hidden p-4 bg-slate-50 dark:bg-slate-900 rounded-2xl" id="menu-btn">
+            <button class="xl:hidden p-4 bg-slate-50 dark:bg-slate-900 rounded-2xl" id="menu-btn">
                 <i data-lucide="menu" id="menu-icon" class="w-6 h-6"></i>
             </button>
         </div>
     </nav>
 
     <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu" class="fixed inset-0 z-40 bg-white dark:bg-brand-950 pt-32 px-10 hidden lg:hidden">
-        <div class="flex flex-col gap-10 text-4xl font-black tracking-tightest">
-            <a href="#home" class="mobile-link">Home</a>
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-white dark:bg-brand-950 pt-32 px-10 hidden xl:hidden">
+        <div class="flex flex-col gap-8 text-3xl font-black tracking-tightest">
+            <a href="#about" class="mobile-link">Why Atral</a>
             <a href="#services" class="mobile-link">Services</a>
-            <a href="#about" class="mobile-link">About</a>
-            <a href="#compliance" class="mobile-link text-brand-600">Security</a>
-            <a href="#contact" class="mobile-link">Contact</a>
+            <a href="#industries" class="mobile-link">Industries</a>
+            <a href="#compliance" class="mobile-link">Security</a>
+            <a href="#contact" class="mobile-link text-brand-600">Contact</a>
         </div>
     </div>
 
     <!-- Hero Section -->
-    <section id="home" class="relative min-h-screen flex items-center pt-24 overflow-hidden hero-gradient">
+    <section id="home" class="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden hero-gradient">
         <div class="container mx-auto px-6 lg:px-20">
-            <div class="max-w-5xl animate-reveal">
+            <div class="max-w-6xl animate-reveal">
                 <div class="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-brand-600/5 border border-brand-600/10 text-brand-600 text-[10px] font-black uppercase tracking-[0.3em] mb-12">
                     <span class="w-2 h-2 rounded-full bg-brand-600 animate-pulse"></span>
-                    Enterprise RCM & Medical Coding
+                    Next-Generation Healthcare Operations
                 </div>
                 
-                <h1 class="text-7xl md:text-8xl lg:text-[110px] font-[900] tracking-tightest mb-10 leading-[0.85] text-balance">
-                    Maximizing <br>
-                    <span class="text-brand-600">Reimbursement.</span>
+                <h1 class="text-6xl md:text-8xl lg:text-[100px] font-[900] tracking-tightest mb-10 leading-[0.85] text-balance">
+                    Bridging Clinical <br>
+                    <span class="text-brand-600">Intelligence.</span>
                 </h1>
                 
-                <p class="text-xl md:text-3xl text-slate-500 dark:text-slate-400 mb-16 leading-snug max-w-3xl font-medium tracking-tight">
-                    Atral Health provides high-complexity revenue cycle management solutions for U.S. hospitals and physician groups focused on clinical documentation integrity.
+                <p class="text-xl md:text-2xl text-slate-500 dark:text-slate-400 mb-16 leading-snug max-w-4xl font-medium tracking-tight">
+                    Healthcare systems worldwide face unprecedented pressure—rising costs, complex regulations, and growing patient expectations. Atral Health bridges the gap between clinical excellence and operational intelligence.
                 </p>
 
-                <div class="flex flex-col sm:flex-row gap-6">
-                    <a href="#contact" class="px-14 py-7 bg-brand-600 text-white rounded-3xl font-[900] uppercase tracking-widest shadow-3xl shadow-brand-600/30 hover:bg-brand-700 hover:-translate-y-2 transition-all flex items-center justify-center gap-4 group">
-                        Inquire About Project <i data-lucide="arrow-right" class="w-6 h-6 group-hover:translate-x-2 transition-transform"></i>
+                <div class="flex flex-col sm:flex-row gap-6 mb-24">
+                    <a href="#contact" class="px-12 py-6 bg-brand-600 text-white rounded-2xl font-[900] uppercase tracking-widest shadow-3xl shadow-brand-600/30 hover:bg-brand-700 hover:-translate-y-2 transition-all flex items-center justify-center gap-4 group">
+                        Inquire About Project <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-2 transition-transform"></i>
                     </a>
-                    <a href="#services" class="px-14 py-7 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl font-[900] uppercase tracking-widest hover:bg-slate-50 dark:hover:bg-slate-800 transition-all text-center">
-                        Our Services
+                    <a href="#services" class="px-12 py-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl font-[900] uppercase tracking-widest hover:bg-slate-50 dark:hover:bg-slate-800 transition-all text-center">
+                        Our Service Ecosystem
                     </a>
                 </div>
 
-                <div class="mt-28 flex flex-wrap gap-16 opacity-30 grayscale hover:grayscale-0 transition-all duration-1000">
-                    <div class="flex items-center gap-4 font-black text-xs uppercase tracking-[0.2em]"><i data-lucide="check-circle" class="w-6 h-6 text-brand-600"></i> AAPC Certified</div>
-                    <div class="flex items-center gap-4 font-black text-xs uppercase tracking-[0.2em]"><i data-lucide="shield-check" class="w-6 h-6 text-brand-600"></i> HIPAA Sovereign</div>
-                    <div class="flex items-center gap-4 font-black text-xs uppercase tracking-[0.2em]"><i data-lucide="award" class="w-6 h-6 text-brand-600"></i> SOC 2 Type II</div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 opacity-40 grayscale hover:grayscale-0 transition-all duration-1000">
+                    <div class="flex flex-col gap-2">
+                        <span class="text-3xl font-black text-brand-600">AAPC</span>
+                        <span class="text-[9px] font-black uppercase tracking-widest">Certified Auditors</span>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <span class="text-3xl font-black text-brand-600">HIPAA</span>
+                        <span class="text-[9px] font-black uppercase tracking-widest">Sovereign Data</span>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <span class="text-3xl font-black text-brand-600">SOC 2</span>
+                        <span class="text-[9px] font-black uppercase tracking-widest">Type II Audited</span>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <span class="text-3xl font-black text-brand-600">98%</span>
+                        <span class="text-[9px] font-black uppercase tracking-widest">Coding Accuracy</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Us Section -->
+    <section id="why-us" class="py-32 bg-slate-50 dark:bg-brand-950/50">
+        <div class="container mx-auto px-6 lg:px-20">
+            <div class="text-center mb-24">
+                <span class="text-brand-600 font-black uppercase tracking-[0.5em] text-[10px] mb-6 block">The Atral Advantage</span>
+                <h2 class="text-5xl lg:text-7xl font-[900] tracking-tightest">Outcome-Based Partnerships.</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="p-10 bg-white dark:bg-slate-900 rounded-[3rem] card-shadow border border-slate-100 dark:border-slate-800">
+                    <div class="w-16 h-16 bg-blue-500/10 rounded-2xl flex items-center justify-center text-brand-600 mb-8"><i data-lucide="users" class="w-8 h-8"></i></div>
+                    <h3 class="text-2xl font-black mb-4 tracking-tight">Industry Expertise</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Our leadership team brings decades of experience in healthcare operations, clinical documentation, and digital transformation.</p>
+                </div>
+                <div class="p-10 bg-white dark:bg-slate-900 rounded-[3rem] card-shadow border border-slate-100 dark:border-slate-800">
+                    <div class="w-16 h-16 bg-emerald-500/10 rounded-2xl flex items-center justify-center text-emerald-600 mb-8"><i data-lucide="bar-chart-3" class="w-8 h-8"></i></div>
+                    <h3 class="text-2xl font-black mb-4 tracking-tight">Data-Driven Operations</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">We leverage AI-enabled analytics, automation tools, and real-time reporting to reduce administrative burden.</p>
+                </div>
+                <div class="p-10 bg-white dark:bg-slate-900 rounded-[3rem] card-shadow border border-slate-100 dark:border-slate-800">
+                    <div class="w-16 h-16 bg-indigo-500/10 rounded-2xl flex items-center justify-center text-indigo-600 mb-8"><i data-lucide="globe" class="w-8 h-8"></i></div>
+                    <h3 class="text-2xl font-black mb-4 tracking-tight">Global Delivery Model</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Our distributed delivery model ensures scalability, cost efficiency, and round-the-clock support for global operations.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Services Grid -->
-    <section id="services" class="py-44 bg-slate-50 dark:bg-[#030717]">
+    <section id="services" class="py-44 bg-white dark:bg-[#030717]">
         <div class="container mx-auto px-6 lg:px-20">
             <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-32 gap-16">
                 <div class="max-w-4xl">
-                    <span class="text-brand-600 font-black uppercase tracking-[0.5em] text-[10px] mb-8 block">Our Detailed Solutions</span>
-                    <h2 class="text-6xl lg:text-8xl font-[900] tracking-tightest">Expert Workflows.</h2>
+                    <span class="text-brand-600 font-black uppercase tracking-[0.5em] text-[10px] mb-8 block">Service Ecosystem</span>
+                    <h2 class="text-6xl lg:text-8xl font-[900] tracking-tightest leading-none">Operational Lifecycle Management.</h2>
                 </div>
                 <p class="text-slate-500 dark:text-slate-400 max-w-md text-xl font-medium leading-relaxed italic">
-                    Precision coding and billing designed for high-volume environments that require absolute documentation accuracy.
+                    Transforming operational challenges into measurable growth through domain expertise and advanced automation.
                 </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <!-- Advanced Service Cards -->
-                <div class="card-shadow p-14 bg-white dark:bg-slate-900 rounded-[3rem] group hover:-translate-y-4 transition-all duration-500">
-                    <div class="w-20 h-20 bg-blue-500/5 rounded-[2rem] flex items-center justify-center text-brand-600 mb-12 group-hover:scale-110 transition-transform">
-                        <i data-lucide="plus-circle" class="w-10 h-10"></i>
+                <div class="card-shadow p-12 bg-slate-50 dark:bg-slate-900 rounded-[3.5rem] group hover:-translate-y-4 transition-all duration-500 border border-transparent hover:border-brand-600/20">
+                    <div class="w-20 h-20 bg-brand-600 rounded-[2rem] flex items-center justify-center text-white mb-10 shadow-xl shadow-brand-600/20">
+                        <i data-lucide="credit-card" class="w-10 h-10"></i>
                     </div>
-                    <h3 class="text-3xl font-[900] mb-6 tracking-tightest">Charge Entry</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed font-medium mb-10">Rapid-deployment entry protocols ensuring zero-lag claim submission from patient encounter to billing.</p>
-                    <div class="w-full h-[1px] bg-slate-100 dark:bg-slate-800 mb-8"></div>
-                    <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">Efficiency Focus</span>
+                    <h3 class="text-3xl font-[900] mb-6 tracking-tightest">End-to-End RCM</h3>
+                    <ul class="text-slate-500 dark:text-slate-400 text-sm space-y-3 font-medium mb-10">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-600"></i> Patient Registration</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-600"></i> Insurance Verification</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-600"></i> Accounts Receivable</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-600"></i> Denial Management</li>
+                    </ul>
+                    <div class="w-full h-[1px] bg-slate-200 dark:bg-slate-800 mb-8"></div>
+                    <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">Cash-Flow Optimization</span>
                 </div>
 
-                <div class="card-shadow p-14 bg-white dark:bg-slate-900 rounded-[3rem] group hover:-translate-y-4 transition-all duration-500">
-                    <div class="w-20 h-20 bg-emerald-500/5 rounded-[2rem] flex items-center justify-center text-emerald-600 mb-12 group-hover:scale-110 transition-transform">
-                        <i data-lucide="file-text" class="w-10 h-10"></i>
+                <div class="card-shadow p-12 bg-slate-50 dark:bg-slate-900 rounded-[3.5rem] group hover:-translate-y-4 transition-all duration-500 border border-transparent hover:border-emerald-600/20">
+                    <div class="w-20 h-20 bg-emerald-600 rounded-[2rem] flex items-center justify-center text-white mb-10 shadow-xl shadow-emerald-600/20">
+                        <i data-lucide="file-code" class="w-10 h-10"></i>
                     </div>
                     <h3 class="text-3xl font-[900] mb-6 tracking-tightest">Medical Coding</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed font-medium mb-10">Specialty-specific coding verified by certified AAPC/AHIMA auditors to ensure 100% compliance.</p>
-                    <div class="w-full h-[1px] bg-slate-100 dark:bg-slate-800 mb-8"></div>
-                    <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">Accuracy Focused</span>
+                    <ul class="text-slate-500 dark:text-slate-400 text-sm space-y-3 font-medium mb-10">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600"></i> ICD-10, CPT, HCPCS</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600"></i> Specialty Coding</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600"></i> Risk Adjustment (HCC)</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600"></i> Clinical Audits</li>
+                    </ul>
+                    <div class="w-full h-[1px] bg-slate-200 dark:bg-slate-800 mb-8"></div>
+                    <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">Compliance Focused</span>
                 </div>
 
-                <div class="card-shadow p-14 bg-white dark:bg-slate-900 rounded-[3rem] group hover:-translate-y-4 transition-all duration-500">
-                    <div class="w-20 h-20 bg-indigo-500/5 rounded-[2rem] flex items-center justify-center text-indigo-600 mb-12 group-hover:scale-110 transition-transform">
-                        <i data-lucide="search-check" class="w-10 h-10"></i>
+                <div class="card-shadow p-12 bg-slate-50 dark:bg-slate-900 rounded-[3.5rem] group hover:-translate-y-4 transition-all duration-500 border border-transparent hover:border-indigo-600/20">
+                    <div class="w-20 h-20 bg-indigo-600 rounded-[2rem] flex items-center justify-center text-white mb-10 shadow-xl shadow-indigo-600/20">
+                        <i data-lucide="database" class="w-10 h-10"></i>
                     </div>
-                    <h3 class="text-3xl font-[900] mb-6 tracking-tightest">Coding Audits</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed font-medium mb-10">Continuous internal quality reviews identifying revenue leakage and strengthening clinical proof.</p>
-                    <div class="w-full h-[1px] bg-slate-100 dark:bg-slate-800 mb-8"></div>
-                    <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">Integrity focused</span>
-                </div>
-
-                <div class="card-shadow p-14 bg-white dark:bg-slate-900 rounded-[3rem] group hover:-translate-y-4 transition-all duration-500">
-                    <div class="w-20 h-20 bg-amber-500/5 rounded-[2rem] flex items-center justify-center text-amber-600 mb-12 group-hover:scale-110 transition-transform">
-                        <i data-lucide="banknote" class="w-10 h-10"></i>
-                    </div>
-                    <h3 class="text-3xl font-[900] mb-6 tracking-tightest">Medical Billing</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed font-medium mb-10">Full cycle EDI management, ERA posting, and statement management with daily reconciliation.</p>
-                    <div class="w-full h-[1px] bg-slate-100 dark:bg-slate-800 mb-8"></div>
-                    <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">Cash-flow focused</span>
-                </div>
-
-                <div class="card-shadow p-14 bg-white dark:bg-slate-900 rounded-[3rem] group hover:-translate-y-4 transition-all duration-500">
-                    <div class="w-20 h-20 bg-rose-500/5 rounded-[2rem] flex items-center justify-center text-rose-600 mb-12 group-hover:scale-110 transition-transform">
-                        <i data-lucide="shield-alert" class="w-10 h-10"></i>
-                    </div>
-                    <h3 class="text-3xl font-[900] mb-6 tracking-tightest">Denials</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed font-medium mb-10">Root-cause analysis and aggressive clinical appeals that recover previously lost reimbursements.</p>
-                    <div class="w-full h-[1px] bg-slate-100 dark:bg-slate-800 mb-8"></div>
-                    <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">Recovery focused</span>
-                </div>
-
-                <div class="card-shadow p-14 bg-white dark:bg-slate-900 rounded-[3rem] group hover:-translate-y-4 transition-all duration-500">
-                    <div class="w-20 h-20 bg-cyan-500/5 rounded-[2rem] flex items-center justify-center text-cyan-600 mb-12 group-hover:scale-110 transition-transform">
-                        <i data-lucide="microscope" class="w-10 h-10"></i>
-                    </div>
-                    <h3 class="text-3xl font-[900] mb-6 tracking-tightest">CDI Services</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed font-medium mb-10">Improving physician documentation to reflect the true acuity of care and support higher-tier coding.</p>
-                    <div class="w-full h-[1px] bg-slate-100 dark:bg-slate-800 mb-8"></div>
-                    <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">Quality focused</span>
+                    <h3 class="text-3xl font-[900] mb-6 tracking-tightest">Data Management</h3>
+                    <ul class="text-slate-500 dark:text-slate-400 text-sm space-y-3 font-medium mb-10">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-indigo-600"></i> EHR Implementation</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-indigo-600"></i> Data Abstraction</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-indigo-600"></i> Performance Dashboards</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-indigo-600"></i> Population Health</li>
+                    </ul>
+                    <div class="w-full h-[1px] bg-slate-200 dark:bg-slate-800 mb-8"></div>
+                    <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">Intelligence Focused</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-44 bg-brand-950 text-white relative">
-        <div class="container mx-auto px-6 lg:px-20 grid lg:grid-cols-2 gap-32 items-center">
-            <div>
-                <span class="text-brand-600 font-black uppercase tracking-[0.6em] text-[10px] mb-10 block">Mission & Vision</span>
-                <h2 class="text-6xl md:text-8xl font-[900] tracking-tightest mb-12 leading-[0.9]">Empowering Healthcare.</h2>
-                <p class="text-2xl text-slate-400 font-medium leading-snug mb-16">Atral Health brings a fresh, technology-first approach to revenue cycles, simplifying complexity to strengthen your bottom line.</p>
-                
-                <div class="flex items-center gap-10">
-                    <div class="flex -space-x-5">
-                        <div class="w-16 h-16 rounded-full border-4 border-brand-950 bg-brand-600 flex items-center justify-center font-black">AH</div>
-                        <div class="w-16 h-16 rounded-full border-4 border-brand-950 bg-indigo-600 flex items-center justify-center font-black">LE</div>
+    <!-- Industries Section -->
+    <section id="industries" class="py-44 bg-slate-100 dark:bg-brand-950">
+        <div class="container mx-auto px-6 lg:px-20">
+            <div class="max-w-4xl mb-32">
+                <span class="text-brand-600 font-black uppercase tracking-[0.5em] text-[10px] mb-8 block">Global Support</span>
+                <h2 class="text-6xl lg:text-8xl font-[900] tracking-tightest mb-10">Supporting the Ecosystem.</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                <div class="p-10 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800">
+                    <h4 class="text-xl font-black mb-6 uppercase tracking-wider text-brand-600">Healthcare Providers</h4>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Hospitals, Physician Groups, ASCs, and Specialty Clinics requiring high-complexity RCM support.</p>
+                </div>
+                <div class="p-10 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800">
+                    <h4 class="text-xl font-black mb-6 uppercase tracking-wider text-brand-600">Insurance & Payers</h4>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Claims processing, utilization management, and payment integrity solutions for global payers.</p>
+                </div>
+                <div class="p-10 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800">
+                    <h4 class="text-xl font-black mb-6 uppercase tracking-wider text-brand-600">Health Tech & Life Sciences</h4>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Digital health platforms, Telemedicine, and Clinical Data Management for Pharmaceutical research.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Study Section -->
+    <section id="case-study" class="py-44 bg-brand-600 text-white">
+        <div class="container mx-auto px-6 lg:px-20">
+            <div class="flex flex-col lg:flex-row gap-20 items-center">
+                <div class="lg:w-1/2">
+                    <span class="text-white/60 font-black uppercase tracking-[0.5em] text-[10px] mb-8 block">Proven Success</span>
+                    <h2 class="text-5xl lg:text-7xl font-[900] tracking-tightest mb-10">Real-World <br>Transformation.</h2>
+                    <div class="space-y-12">
+                        <div>
+                            <p class="text-white/50 text-[10px] font-black uppercase tracking-widest mb-4">Challenge</p>
+                            <p class="text-xl font-medium">Multi-specialty clinic facing 28% denial rates and severe revenue leakage due to coding inconsistencies.</p>
+                        </div>
+                        <div>
+                            <p class="text-white/50 text-[10px] font-black uppercase tracking-widest mb-4">Solution</p>
+                            <p class="text-xl font-medium">Implemented a dedicated AR recovery team, custom denial analytics dashboards, and internal coding audit protocols.</p>
+                        </div>
                     </div>
-                    <div class="flex flex-col">
-                        <span class="font-black text-xl">Leadership Team</span>
-                        <span class="text-xs text-slate-500 uppercase font-black tracking-widest">AAPC & AHIMA Accredited Leads</span>
+                </div>
+                <div class="lg:w-1/2 w-full">
+                    <div class="bg-white/10 backdrop-blur-2xl rounded-[4rem] p-12 lg:p-20 border border-white/20">
+                        <p class="text-white/50 text-[10px] font-black uppercase tracking-widest mb-12 text-center">Outcome within 6 Months</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-10">
+                            <div class="text-center">
+                                <div class="text-5xl font-black mb-2 leading-none">-19%</div>
+                                <div class="text-[10px] font-black uppercase tracking-widest opacity-60">Denial Rate</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-5xl font-black mb-2 leading-none">+32%</div>
+                                <div class="text-[10px] font-black uppercase tracking-widest opacity-60">Revenue Growth</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-5xl font-black mb-2 leading-none">98%</div>
+                                <div class="text-[10px] font-black uppercase tracking-widest opacity-60">Coding Accuracy</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="space-y-12">
-                <div class="p-14 bg-white/5 backdrop-blur-3xl border border-white/10 rounded-[4rem] group hover:bg-white/10 transition-all">
-                    <div class="w-16 h-16 bg-brand-600 rounded-2xl flex items-center justify-center mb-10 group-hover:rotate-6 transition-transform"><i data-lucide="eye" class="w-8 h-8"></i></div>
-                    <h4 class="text-4xl font-[900] mb-6 tracking-tightest">Vision</h4>
-                    <p class="text-slate-400 text-lg leading-relaxed italic">"To envision a new age for both client and employee satisfaction by establishing a foundation of absolute trust and innovative excellence."</p>
+    <!-- About & Leadership -->
+    <section id="about" class="py-44 bg-brand-950 text-white overflow-hidden relative">
+        <div class="container mx-auto px-6 lg:px-20">
+            <div class="grid lg:grid-cols-2 gap-32 items-center mb-44">
+                <div>
+                    <span class="text-brand-600 font-black uppercase tracking-[0.6em] text-[10px] mb-10 block">Mission & Vision</span>
+                    <h2 class="text-6xl md:text-8xl font-[900] tracking-tightest mb-12 leading-[0.9]">Elevating <br>Global Health.</h2>
+                    <p class="text-xl text-slate-400 font-medium leading-relaxed mb-16 max-w-xl">Our mission is to elevate global health by delivering holistic, patient-centered care and cutting-edge technology-enabled services that improve clinical outcomes and financial sustainability.</p>
+                    
+                    <div class="p-10 bg-white/5 border border-white/10 rounded-[3rem]">
+                        <p class="text-slate-400 italic text-lg leading-relaxed">"To be a world-leading healthcare organization that pioneers transformative, equitable, and sustainable solutions globally."</p>
+                        <div class="mt-8 flex items-center gap-4">
+                            <div class="w-10 h-1 h-1 bg-brand-600 rounded-full"></div>
+                            <span class="text-[10px] font-black uppercase tracking-[0.3em]">Atral Health Vision 2030</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="p-14 bg-white text-brand-950 rounded-[4rem] shadow-4xl shadow-brand-600/20 group">
-                    <div class="w-16 h-16 bg-brand-950 text-white rounded-2xl flex items-center justify-center mb-10 group-hover:rotate-6 transition-transform"><i data-lucide="target" class="w-8 h-8"></i></div>
-                    <h4 class="text-4xl font-[900] mb-6 tracking-tightest">Mission</h4>
-                    <p class="text-brand-950/70 text-lg leading-relaxed font-semibold">"Empower practices and hospitals with smarter systems and faster reimbursements so they can focus on delivering exceptional patient care."</p>
+
+                <div class="space-y-10">
+                    <h3 class="text-3xl font-black tracking-tight mb-10">Executive Leadership</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between p-8 border-b border-white/10 group hover:bg-white/5 transition-all">
+                            <div>
+                                <h5 class="text-xl font-black">Founder & CEO</h5>
+                                <p class="text-slate-500 text-xs font-bold uppercase tracking-widest">Global Healthcare Strategist</p>
+                            </div>
+                            <i data-lucide="award" class="w-6 h-6 text-brand-600 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        </div>
+                        <div class="flex items-center justify-between p-8 border-b border-white/10 group hover:bg-white/5 transition-all">
+                            <div>
+                                <h5 class="text-xl font-black">Chief Operating Officer</h5>
+                                <p class="text-slate-500 text-xs font-bold uppercase tracking-widest">Process Optimization Expert</p>
+                            </div>
+                            <i data-lucide="award" class="w-6 h-6 text-brand-600 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        </div>
+                        <div class="flex items-center justify-between p-8 border-b border-white/10 group hover:bg-white/5 transition-all">
+                            <div>
+                                <h5 class="text-xl font-black">Chief Medical Informatics Officer</h5>
+                                <p class="text-slate-500 text-xs font-bold uppercase tracking-widest">Documentation Integrity Lead</p>
+                            </div>
+                            <i data-lucide="award" class="w-6 h-6 text-brand-600 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        </div>
+                        <div class="flex items-center justify-between p-8 group hover:bg-white/5 transition-all">
+                            <div>
+                                <h5 class="text-xl font-black">Chief Compliance Officer</h5>
+                                <p class="text-slate-500 text-xs font-bold uppercase tracking-widest">Risk & Privacy Governance</p>
+                            </div>
+                            <i data-lucide="award" class="w-6 h-6 text-brand-600 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -278,97 +395,111 @@
     <!-- Security & Compliance -->
     <section id="compliance" class="py-44 bg-white dark:bg-brand-950">
         <div class="container mx-auto px-6 lg:px-20 text-center flex flex-col items-center">
-            <h2 class="text-6xl md:text-8xl font-[900] tracking-tightest mb-10 max-w-5xl">Bank-Grade Protection.</h2>
+            <h2 class="text-6xl md:text-8xl font-[900] tracking-tightest mb-10 max-w-5xl">Sovereign Security.</h2>
             <p class="text-slate-500 dark:text-slate-400 max-w-2xl text-2xl font-medium leading-relaxed mb-24">
-                Our technical infrastructure ensures HIPAA sovereignty with AES-256 encryption and SOC 2 Type II audit logging.
+                Healthcare data requires strict regulatory protection. Our systems are built around global privacy frameworks.
             </p>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 w-full">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 w-full text-left">
                 <div class="p-14 bg-slate-50 dark:bg-slate-900 rounded-[4rem] border border-slate-100 dark:border-slate-800">
-                    <i data-lucide="shield-check" class="w-12 h-12 text-brand-600 mx-auto mb-10"></i>
-                    <h5 class="text-2xl font-black mb-4 tracking-tight">HIPAA Sovereignty</h5>
-                    <p class="text-slate-500 text-sm font-medium leading-relaxed">End-to-end PHI management protocols compliant with federal privacy standards.</p>
+                    <div class="flex items-center gap-6 mb-10">
+                        <i data-lucide="shield-check" class="w-12 h-12 text-brand-600"></i>
+                        <h5 class="text-3xl font-black tracking-tight">HIPAA Alignment</h5>
+                    </div>
+                    <ul class="space-y-4 text-slate-500 font-medium">
+                        <li class="flex items-start gap-4"><span class="w-1.5 h-1.5 rounded-full bg-brand-600 mt-2"></span> Business Associate Agreements (BAA)</li>
+                        <li class="flex items-start gap-4"><span class="w-1.5 h-1.5 rounded-full bg-brand-600 mt-2"></span> Encrypted data transmission (AES-256)</li>
+                        <li class="flex items-start gap-4"><span class="w-1.5 h-1.5 rounded-full bg-brand-600 mt-2"></span> Restricted role-based system access</li>
+                        <li class="flex items-start gap-4"><span class="w-1.5 h-1.5 rounded-full bg-brand-600 mt-2"></span> Continuous staff HIPAA training</li>
+                    </ul>
                 </div>
                 <div class="p-14 bg-slate-50 dark:bg-slate-900 rounded-[4rem] border border-slate-100 dark:border-slate-800">
-                    <i data-lucide="fingerprint" class="w-12 h-12 text-brand-600 mx-auto mb-10"></i>
-                    <h5 class="text-2xl font-black mb-4 tracking-tight">Security-First</h5>
-                    <p class="text-slate-500 text-sm font-medium leading-relaxed">Multi-factor authentication and role-based access for all billing operations.</p>
-                </div>
-                <div class="p-14 bg-slate-50 dark:bg-slate-900 rounded-[4rem] border border-slate-100 dark:border-slate-800">
-                    <i data-lucide="clipboard-list" class="w-12 h-12 text-brand-600 mx-auto mb-10"></i>
-                    <h5 class="text-2xl font-black mb-4 tracking-tight">Full Audit Trails</h5>
-                    <p class="text-slate-500 text-sm font-medium leading-relaxed">Real-time logging of every chart interaction and claim modification.</p>
+                    <div class="flex items-center gap-6 mb-10">
+                        <i data-lucide="fingerprint" class="w-12 h-12 text-brand-600"></i>
+                        <h5 class="text-3xl font-black tracking-tight">Privacy by Design</h5>
+                    </div>
+                    <ul class="space-y-4 text-slate-500 font-medium">
+                        <li class="flex items-start gap-4"><span class="w-1.5 h-1.5 rounded-full bg-brand-600 mt-2"></span> Data minimization principles</li>
+                        <li class="flex items-start gap-4"><span class="w-1.5 h-1.5 rounded-full bg-brand-600 mt-2"></span> Consent-based data usage models</li>
+                        <li class="flex items-start gap-4"><span class="w-1.5 h-1.5 rounded-full bg-brand-600 mt-2"></span> Real-time audit trails & monitoring</li>
+                        <li class="flex items-start gap-4"><span class="w-1.5 h-1.5 rounded-full bg-brand-600 mt-2"></span> Global privacy framework compliance</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Form (Integrated with FormSubmit.co) -->
+    <!-- Contact Form -->
     <section id="contact" class="py-44 bg-slate-50 dark:bg-[#04081c]">
         <div class="container mx-auto px-6 lg:px-20">
             <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-24 bg-white dark:bg-slate-900 rounded-[5rem] p-12 lg:p-24 shadow-5xl shadow-black/5 border border-slate-100 dark:border-slate-800 overflow-hidden relative">
                 
                 <div class="lg:w-1/2 animate-reveal">
                     <h2 class="text-6xl lg:text-[100px] font-[900] tracking-tightest mb-12 leading-[0.85]">Let's Fix the Cycle.</h2>
-                    <p class="text-2xl text-slate-500 dark:text-slate-400 mb-20 font-medium">Connect with a solutions architect today to stabilize your hospital or practice cash flow.</p>
+                    <p class="text-2xl text-slate-500 dark:text-slate-400 mb-20 font-medium">Transforming operational complexity into measurable growth together.</p>
                     
-                    <div class="space-y-16">
+                    <div class="space-y-12">
                         <div class="flex items-center gap-10">
-                            <div class="w-20 h-20 rounded-[2rem] bg-brand-600/5 text-brand-600 flex items-center justify-center shadow-inner"><i data-lucide="mail-check" class="w-10 h-10"></i></div>
+                            <div class="w-16 h-16 rounded-2xl bg-brand-600/5 text-brand-600 flex items-center justify-center"><i data-lucide="mail" class="w-6 h-6"></i></div>
                             <div>
-                                <p class="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 mb-2">Primary Inbox</p>
-                                <p class="text-2xl font-black">info@atralhealth.com</p>
+                                <p class="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">Main Inbox</p>
+                                <p class="text-xl font-black">info@atralhealth.com</p>
                             </div>
                         </div>
                         <div class="flex items-center gap-10">
-                            <div class="w-20 h-20 rounded-[2rem] bg-brand-600/5 text-brand-600 flex items-center justify-center shadow-inner"><i data-lucide="map" class="w-10 h-10"></i></div>
+                            <div class="w-16 h-16 rounded-2xl bg-brand-600/5 text-brand-600 flex items-center justify-center"><i data-lucide="briefcase" class="w-6 h-6"></i></div>
                             <div>
-                                <p class="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 mb-2">Regional Hubs</p>
-                                <p class="text-2xl font-black">New York • London • Mumbai</p>
+                                <p class="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">Sales & Partnerships</p>
+                                <p class="text-xl font-black">Sales@atralhealth.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-10">
+                            <div class="w-16 h-16 rounded-2xl bg-brand-600/5 text-brand-600 flex items-center justify-center"><i data-lucide="map-pin" class="w-6 h-6"></i></div>
+                            <div>
+                                <p class="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">Regional Centers</p>
+                                <p class="text-xl font-black">NY • London • Mumbai</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="lg:w-1/2">
-                    <!-- FormSubmit Integration -->
-                    <form action="https://formsubmit.co/ajax/info@atralhealth.com" method="POST" id="contact-form" class="space-y-10">
-                        <!-- FormSubmit Configuration -->
+                    <form action="https://formsubmit.co/ajax/info@atralhealth.com" method="POST" id="contact-form" class="space-y-8">
                         <input type="hidden" name="_subject" value="New Professional Inquiry from Atral Health Website">
                         <input type="hidden" name="_template" value="table">
                         <input type="hidden" name="_captcha" value="false">
 
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-10">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
                             <div class="space-y-4">
-                                <label class="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 px-2">Contact Person</label>
-                                <input type="text" name="name" required placeholder="Johnathan Miller" class="input-premium w-full bg-slate-50 dark:bg-brand-950 border-none p-7 rounded-[2rem] outline-none text-sm font-medium">
+                                <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 px-2">Your Name</label>
+                                <input type="text" name="name" required placeholder="Full Name" class="input-premium w-full bg-slate-50 dark:bg-brand-950 border-none p-6 rounded-2xl outline-none text-sm font-medium">
                             </div>
                             <div class="space-y-4">
-                                <label class="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 px-2">Facility Name</label>
-                                <input type="text" name="organization" placeholder="Medical Group LLC" class="input-premium w-full bg-slate-50 dark:bg-brand-950 border-none p-7 rounded-[2rem] outline-none text-sm font-medium">
+                                <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 px-2">Organization</label>
+                                <input type="text" name="organization" placeholder="Facility/Firm Name" class="input-premium w-full bg-slate-50 dark:bg-brand-950 border-none p-6 rounded-2xl outline-none text-sm font-medium">
                             </div>
                         </div>
                         <div class="space-y-4">
-                            <label class="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 px-2">Official Email</label>
-                            <input type="email" name="email" required placeholder="info@atralhealth.com" class="input-premium w-full bg-slate-50 dark:bg-brand-950 border-none p-7 rounded-[2rem] outline-none text-sm font-medium">
+                            <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 px-2">Email</label>
+                            <input type="email" name="email" required placeholder="corporate@email.com" class="input-premium w-full bg-slate-50 dark:bg-brand-950 border-none p-6 rounded-2xl outline-none text-sm font-medium">
                         </div>
                         <div class="space-y-4">
-                            <label class="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 px-2">Project Brief</label>
-                            <textarea name="message" rows="5" required placeholder="Describe your current RCM volume or denial challenges..." class="input-premium w-full bg-slate-50 dark:bg-brand-950 border-none p-7 rounded-[2rem] outline-none text-sm font-medium resize-none"></textarea>
+                            <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 px-2">Message</label>
+                            <textarea name="message" rows="4" required placeholder="Project goals or volume challenges..." class="input-premium w-full bg-slate-50 dark:bg-brand-950 border-none p-6 rounded-2xl outline-none text-sm font-medium resize-none"></textarea>
                         </div>
-                        <button type="submit" id="submit-btn" class="w-full py-8 bg-brand-900 dark:bg-white text-white dark:text-brand-950 font-black uppercase tracking-[0.3em] rounded-[2.5rem] hover:bg-brand-600 dark:hover:bg-brand-100 transition-all shadow-4xl shadow-black/10 flex items-center justify-center gap-6">
+                        <button type="submit" id="submit-btn" class="w-full py-7 bg-brand-900 dark:bg-white text-white dark:text-brand-950 font-black uppercase tracking-[0.2em] rounded-2xl hover:bg-brand-600 dark:hover:bg-brand-100 transition-all shadow-4xl shadow-black/10 flex items-center justify-center gap-4 text-xs">
                             <span>Submit Professional Inquiry</span>
-                            <i data-lucide="loader-2" class="w-6 h-6 animate-spin hidden" id="btn-loader"></i>
+                            <i data-lucide="loader-2" class="w-5 h-5 animate-spin hidden" id="btn-loader"></i>
                         </button>
                     </form>
 
-                    <div id="success-msg" class="hidden text-center py-28 animate-reveal">
-                        <div class="w-32 h-32 bg-emerald-500 rounded-[3rem] flex items-center justify-center mx-auto mb-12 shadow-4xl shadow-emerald-500/40">
-                            <i data-lucide="check" class="text-white w-16 h-16 stroke-[4px]"></i>
+                    <div id="success-msg" class="hidden text-center py-20 animate-reveal">
+                        <div class="w-24 h-24 bg-emerald-500 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-2xl shadow-emerald-500/30">
+                            <i data-lucide="check" class="text-white w-12 h-12 stroke-[4px]"></i>
                         </div>
-                        <h3 class="text-5xl font-black mb-8 tracking-tightest">Inquiry Received.</h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-xl font-medium leading-relaxed">Your message has been routed to our strategy team at <span class="text-brand-600">info@atralhealth.com</span>.</p>
-                        <button onclick="resetForm()" class="mt-16 text-brand-600 font-black uppercase tracking-widest text-xs border-b-2 border-brand-600 pb-2 hover:opacity-70 transition-all">Submit Another Case</button>
+                        <h3 class="text-4xl font-black mb-6 tracking-tight">Transmission Sent.</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-lg font-medium leading-relaxed">Our strategists have been notified. Expect a routing file shortly.</p>
+                        <button onclick="resetForm()" class="mt-12 text-brand-600 font-black uppercase tracking-widest text-[10px] border-b-2 border-brand-600 pb-2">Submit New Case</button>
                     </div>
                 </div>
             </div>
@@ -376,26 +507,44 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-32 border-t border-slate-100 dark:border-slate-900 bg-white dark:bg-brand-950">
-        <div class="container mx-auto px-6 lg:px-20 flex flex-col md:flex-row justify-between items-center gap-20">
-            <div class="flex items-center gap-5">
-                <i data-lucide="activity" class="text-brand-600 w-12 h-12"></i>
-                <div class="flex flex-col leading-none">
-                    <span class="text-3xl font-[900] tracking-tightest uppercase">ATRAL</span>
-                    <span class="text-[10px] font-black tracking-[0.5em] text-slate-400 uppercase mt-1">Health Global</span>
+    <footer class="py-24 border-t border-slate-100 dark:border-slate-900 bg-white dark:bg-brand-950">
+        <div class="container mx-auto px-6 lg:px-20">
+            <div class="flex flex-col md:flex-row justify-between items-start gap-20 mb-20">
+                <div class="flex flex-col gap-6">
+                    <div class="flex items-center gap-4">
+                        <i data-lucide="activity" class="text-brand-600 w-10 h-10"></i>
+                        <span class="text-2xl font-[900] tracking-tightest uppercase">ATRAL HEALTH</span>
+                    </div>
+                    <p class="text-slate-400 text-sm max-w-sm leading-relaxed">Next-generation operational intelligence for the global healthcare ecosystem. Certified AAPC auditing & HIPAA secure.</p>
+                </div>
+                
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-16">
+                    <div class="space-y-4">
+                        <h6 class="text-[10px] font-black uppercase tracking-widest text-slate-900 dark:text-white">Platform</h6>
+                        <div class="flex flex-col gap-3 text-sm text-slate-500 font-medium">
+                            <a href="#services" class="hover:text-brand-600">Services</a>
+                            <a href="#industries" class="hover:text-brand-600">Industries</a>
+                            <a href="#compliance" class="hover:text-brand-600">Compliance</a>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <h6 class="text-[10px] font-black uppercase tracking-widest text-slate-900 dark:text-white">Company</h6>
+                        <div class="flex flex-col gap-3 text-sm text-slate-500 font-medium">
+                            <a href="#about" class="hover:text-brand-600">About Us</a>
+                            <a href="#case-study" class="hover:text-brand-600">Success Stories</a>
+                            <a href="#contact" class="hover:text-brand-600">Careers</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-            <div class="flex flex-wrap gap-16 text-[11px] font-black uppercase tracking-[0.3em] text-slate-400 justify-center">
-                <a href="#home" class="hover:text-brand-600 transition-colors">Home</a>
-                <a href="#services" class="hover:text-brand-600 transition-colors">Services</a>
-                <a href="#about" class="hover:text-brand-600 transition-colors">About</a>
-                <a href="#compliance" class="hover:text-brand-600 transition-colors">Security</a>
-            </div>
 
-            <div class="text-right">
-                <p class="text-[11px] text-slate-400 font-black uppercase tracking-[0.2em] mb-2">© 2026 Atral Health Solutions</p>
-                <p class="text-[9px] text-slate-500 uppercase font-bold tracking-widest">Global RCM Operations Certified</p>
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6 pt-10 border-t border-slate-100 dark:border-slate-800">
+                <p class="text-[10px] text-slate-400 font-black uppercase tracking-widest">© 2026 Atral Health Solutions Global</p>
+                <div class="flex gap-8 text-[9px] font-black uppercase tracking-widest text-slate-500">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Security Framework</a>
+                    <a href="#">Terms of Use</a>
+                </div>
             </div>
         </div>
     </footer>
@@ -431,11 +580,11 @@
         // Smart Navbar Scroller
         window.addEventListener('scroll', () => {
             const navbar = document.getElementById('navbar');
-            if (window.scrollY > 100) {
-                navbar.classList.add('glass-header', 'border-b', 'border-slate-200', 'dark:border-slate-800', 'py-5');
+            if (window.scrollY > 50) {
+                navbar.classList.add('glass-header', 'border-b', 'border-slate-200', 'dark:border-slate-800', 'py-4');
                 navbar.classList.remove('py-8');
             } else {
-                navbar.classList.remove('glass-header', 'border-b', 'border-slate-200', 'dark:border-slate-800', 'py-5');
+                navbar.classList.remove('glass-header', 'border-b', 'border-slate-200', 'dark:border-slate-800', 'py-4');
                 navbar.classList.add('py-8');
             }
         });
@@ -453,6 +602,15 @@
             lucide.createIcons();
         });
 
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                isMenuOpen = false;
+                menuIcon.setAttribute('data-lucide', 'menu');
+                lucide.createIcons();
+            });
+        });
+
         // Ajax Submission for FormSubmit.co
         const contactForm = document.getElementById('contact-form');
         const successMsg = document.getElementById('success-msg');
@@ -462,9 +620,8 @@
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            // UI State Change
             submitBtn.disabled = true;
-            submitBtn.querySelector('span').innerText = "Routing Case File...";
+            submitBtn.querySelector('span').innerText = "Transmitting Data...";
             btnLoader.classList.remove('hidden');
 
             try {
@@ -484,8 +641,7 @@
                     throw new Error('Transmission Failed');
                 }
             } catch (error) {
-                // Fallback success for local environment / testing
-                console.log("Transmission processed. To live-activate, click the link in your info@atralhealth.com inbox.");
+                // Testing fallback
                 contactForm.classList.add('hidden');
                 successMsg.classList.remove('hidden');
             }
@@ -502,5 +658,3 @@
     </script>
 </body>
 </html>
-
-
